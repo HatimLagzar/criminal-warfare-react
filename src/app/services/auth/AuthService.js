@@ -4,9 +4,9 @@ import { setToken, setUser } from '../../features/auth/authSlice';
 import toastr from 'toastr';
 
 class AuthService {
-  login(email, password) {
+  login(username, password) {
     const formData = new FormData();
-    formData.set('email', email);
+    formData.set('username', username);
     formData.set('password', password);
 
     return login(formData)

@@ -1,19 +1,27 @@
 import Button from '../Button/Button';
 import InputGroup from '../InputGroup/InputGroup';
 import './LoginForm.scss';
+import authService from '../../app/services/auth/AuthService';
+import { useState } from 'react';
 
 export default function LoginForm() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
   function handleSubmit(e) {
     e.preventDefault();
+
+    authService.login();
   }
 
   return (
     <form className='login-form' method='POST' onSubmit={handleSubmit}>
       <InputGroup
-        label={'Login'}
-        id={'login-input'}
-        placeholder={'Login'}
+        label={'Username'}
+        id={'username-input'}
+        placeholder={'Username'}
         type={'text'}
+        handleInputChange={(e) => setUsername(e.currentTarget.value)}
       />
 
       <InputGroup
@@ -21,6 +29,7 @@ export default function LoginForm() {
         id={'password-input'}
         placeholder={'Password'}
         type={'password'}
+        handleInputChange={(e) => setPassword(e.currentTarget.value)}
       />
 
       <Button text='Login' classes={'btn-login btn-red'} />
