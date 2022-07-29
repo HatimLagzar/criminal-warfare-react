@@ -14,7 +14,7 @@ const Middle = (props) => {
       <div className={topClasses}></div>
       <div className={'middle-mid'}>
         <Menu />
-        <div class={'content-right'}>{props.children}</div>
+        <div className={'content-right'}>{props.children}</div>
       </div>
       <div className={'middle-btm'}></div>
     </div>

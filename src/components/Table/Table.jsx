@@ -5,9 +5,9 @@ function Table(props) {
   let tbody = [];
   props.data.forEach((row, index) => {
     if (index == 0 && !props.noHeader) {
-      tbody.push(<TableRow header={row} />);
+      tbody.push(<TableRow key={index} header={row} />);
     } else {
-      tbody.push(<TableRow content={row} />);
+      tbody.push(<TableRow key={index} content={row} />);
     }
   });
 
