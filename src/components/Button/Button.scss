@@ -1,0 +1,16 @@
+.btn {
+    min-width: 30px;
+    border-radius: 5px;
+    text-shadow: 1px 1px 2px rgb(0 0 0 / 80%);
+    padding: 4px;
+    cursor: pointer;
+    text-align: center;
+    -webkit-box-shadow: inset 1px 1px 0 0 rgb(0 0 0 / 10%);
+    box-shadow: inset 1px 1px 0 0 rgb(0 0 0 / 10%);
+    border: 1px solid #000;
+    color: #fff;
+
+    &.btn-red {
+        background-color: #802627;
+    }
+}
