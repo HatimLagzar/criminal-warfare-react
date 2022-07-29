@@ -1,0 +1,47 @@
+.login-content-area {
+	flex-basis: calc(50% - 2.5px);
+}
+
+.login-content-area:nth-of-type(2n + 1) {
+	margin-right: 2.5px;
+}
+
+.login-content-area:nth-of-type(2n) {
+	margin-left: 2.5px;
+}
+
+.login-stats-area {
+	flex-basis: calc(33.33333333% - 2.5px);
+}
+
+.login-stats-area:nth-of-type(1),
+.login-stats-area:nth-of-type(2) {
+	margin-right: 2.5px;
+}
+
+.login-stats-area:nth-of-type(2),
+.login-stats-area:nth-of-type(3) {
+	margin-left: 2.5px;
+}
+
+.login-table tr th:nth-of-type(2n + 1),
+.login-table tr td:nth-of-type(2n + 1) {
+	text-align: left;
+}
+
+.login-table tr th:nth-of-type(2n),
+.login-table tr td:nth-of-type(2n) {
+	text-align: right;
+}
+
+p.the-story {
+	margin: 0 5px;
+	line-height: 18px;
+	text-indent: 0;
+}
+
+.input-area {
+	width: 95%;
+	margin: 5px auto;
+	text-align: left;
+}
