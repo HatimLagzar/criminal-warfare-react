@@ -4,7 +4,7 @@ import TableRow from './TableRow';
 function Table(props) {
   let tbody = [];
   props.data.forEach((row, index) => {
-    if (index == 0 && !props.no_header) {
+    if (index == 0 && !props.noHeader) {
       tbody.push(<TableRow header={row} />);
     } else {
       tbody.push(<TableRow content={row} />);
