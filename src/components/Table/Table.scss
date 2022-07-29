@@ -1,0 +1,21 @@
+.table {
+	border-collapse: collapse;
+	width: 100%;
+	table-layout: fixed;
+	border-radius: 3px;
+	border-collapse: collapse;
+}
+.table tr {
+	border-bottom: 1px solid #161616;
+}
+.table tr:last-of-type {
+	border-bottom: 0;
+}
+.table tr td,
+.table tr th {
+	padding: 7px;
+	vertical-align: middle;
+}
+.table th {
+	font-weight: 700;
+}
