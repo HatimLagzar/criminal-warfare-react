@@ -1,14 +1,12 @@
 import React from "react";
-import { Link, Route, Routes } from "react-router-dom";
-import HomePage from "../../pages/Home/HomePage";
-import LoginPage from "../../pages/Login/LoginPage";
+import Footer from "../Footer/Footer";
+import Router from "../Router/Router";
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />}>
-        <Route path="login" element={<LoginPage />} />
-      </Route>
-    </Routes>
+    <>
+      <Router />
+      <Footer />
+    </>
   );
 }
