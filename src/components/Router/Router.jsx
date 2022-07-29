@@ -6,9 +6,8 @@ import LoginPage from '../../pages/Login/LoginPage';
 export default function Router() {
   return (
     <Routes>
-      <Route path='/' element={<HomePage />}>
-        <Route path='login' element={<LoginPage />} />
-      </Route>
+      <Route path='/' element={<HomePage />} />
+      <Route path='login' element={<LoginPage />} />
     </Routes>
   );
 }
