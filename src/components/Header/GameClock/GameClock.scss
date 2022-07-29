@@ -1,0 +1,15 @@
+.game-clock {
+	font-weight: bold;
+	background: rgba(0, 0, 0, 0.22);
+	border: 1px solid #161616;
+	border-radius: 5px;
+	padding: 3px 3px;
+	margin: 0 auto;
+	height: 34px;
+	line-height: 34px;
+	margin-top: 31px;
+	width: 225px;
+}
+.countdown {
+	display: inline-block;
+}
