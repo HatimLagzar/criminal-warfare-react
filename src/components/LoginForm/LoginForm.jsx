@@ -11,7 +11,7 @@ export default function LoginForm() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    authService.login();
+    authService.login(username, password);
   }
 
   return (
