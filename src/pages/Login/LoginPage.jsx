@@ -1,9 +1,9 @@
-import FlexWrap from './../../components/FlexWrap/FlexWrap';
-import FlexRow from './../../components/FlexRow/FlexRow';
-import FlexElement from './../../components/FlexElement/FlexElement';
+import FlexWrap from './../../components/layouts/FlexWrap/FlexWrap';
+import FlexRow from './../../components/layouts/FlexRow/FlexRow';
+import FlexElement from './../../components/layouts/FlexElement/FlexElement';
 import ContentArea from './../../components/ContentArea/ContentArea';
 import './LoginPage.scss';
-import Table from '../../components/Table/Table';
+import Table from '../../components/tables/Table/Table';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';

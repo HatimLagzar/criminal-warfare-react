@@ -1,4 +1,4 @@
-import avatar from '../../../assets/img/avatars/2.png';
+import avatar from '../../../../assets/img/avatars/2.png';
 
 const Avatar = () => {
   return (

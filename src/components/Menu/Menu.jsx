@@ -1,7 +1,7 @@
 import './Menu.scss';
 import MenuGroup from './../MenuGroup/MenuGroup';
 import MenuLink from './../MenuLink/MenuLink';
-import authService from '../../app/services/auth/AuthService';
+import authService from '../../services/auth/AuthService';
 
 const Menu = () => {
   const isLoggedIn = authService.hasBeenAuthenticated();

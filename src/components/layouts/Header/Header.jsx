@@ -1,6 +1,6 @@
 import HeaderBar from './HeaderBar/HeaderBar';
 import StatsRow from './StatsRow/StatsRow';
-import authService from '../../app/services/auth/AuthService';
+import authService from '../../../services/auth/AuthService';
 
 const Header = () => {
   const isLoggedIn = authService.hasBeenAuthenticated();

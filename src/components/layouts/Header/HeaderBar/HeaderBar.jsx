@@ -3,7 +3,7 @@ import HeaderBarContainer from './HeaderBarContainer';
 import Logo from './../Logo/Logo';
 import './HeaderBar.scss';
 import HeaderBarBackground from './HeaderBarBackground';
-import authService from '../../../app/services/auth/AuthService';
+import authService from '../../../../services/auth/AuthService';
 
 const HeaderBar = () => {
   const isLoggedIn = authService.hasBeenAuthenticated();

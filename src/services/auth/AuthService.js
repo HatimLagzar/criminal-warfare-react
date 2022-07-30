@@ -1,6 +1,6 @@
-import { login, refresh } from '../../../api/login-api';
+import { login, refresh } from '../../api/login-api';
 import jwtDecode from 'jwt-decode';
-import { setToken, setUser } from '../../features/auth/authSlice';
+import { setToken, setUser } from '../../store/features/auth/authSlice';
 import toastr from 'toastr';
 
 class AuthService {

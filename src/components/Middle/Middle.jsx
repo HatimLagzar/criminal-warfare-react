@@ -1,4 +1,4 @@
-import authService from '../../app/services/auth/AuthService';
+import authService from '../../services/auth/AuthService';
 import './Middle.scss';
 import Menu from './../Menu/Menu';
 

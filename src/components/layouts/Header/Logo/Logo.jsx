@@ -1,4 +1,4 @@
-import logo from '../../../assets/img/layout/logo.png';
+import logo from '../../../../assets/img/layout/logo.png';
 import FlexEle from '../../FlexElement/FlexElement';
 import './Logo.scss';
 

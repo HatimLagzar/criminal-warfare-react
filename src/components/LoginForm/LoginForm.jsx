@@ -1,7 +1,7 @@
-import Button from '../Button/Button';
-import InputGroup from '../InputGroup/InputGroup';
+import Button from '../buttons/Button/Button';
+import InputGroup from '../forms/InputGroup/InputGroup';
 import './LoginForm.scss';
-import authService from '../../app/services/auth/AuthService';
+import authService from '../../services/auth/AuthService';
 import { useState } from 'react';
 
 export default function LoginForm() {
