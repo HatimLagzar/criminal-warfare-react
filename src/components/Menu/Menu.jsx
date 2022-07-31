@@ -2,9 +2,10 @@ import './Menu.scss';
 import MenuGroup from './../MenuGroup/MenuGroup';
 import MenuLink from './../MenuLink/MenuLink';
 import authService from '../../services/auth/AuthService';
+import useAuthenticationStatus from '../../hooks/auth/useAuthenticationStatus';
 
 const Menu = () => {
-  const isLoggedIn = authService.hasBeenAuthenticated();
+  const isLoggedIn = useAuthenticationStatus();
 
   let menu = [
     { group: 'Navigation' },

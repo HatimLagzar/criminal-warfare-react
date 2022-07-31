@@ -4,9 +4,10 @@ import Logo from './../Logo/Logo';
 import './HeaderBar.scss';
 import HeaderBarBackground from './HeaderBarBackground';
 import authService from '../../../../services/auth/AuthService';
+import useAuthenticationStatus from '../../../../hooks/auth/useAuthenticationStatus';
 
 const HeaderBar = () => {
-  const isLoggedIn = authService.hasBeenAuthenticated();
+  const isLoggedIn = useAuthenticationStatus();
 
   let left, right, left_class_name, right_class_name;
   if (isLoggedIn) {

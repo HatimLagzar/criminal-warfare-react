@@ -48,6 +48,23 @@ class AuthService {
       });
   }
 
+  /**
+   * Restore token from local storage and dispatch it to
+   * redux store
+   *
+   * @param {fn} dispatch
+   */
+  restoreLogin(dispatch) {
+    try {
+      if (this.isExpired() === false) {
+        const token = this.getToken();
+        this.saveToken(token, dispatch);
+      }
+    } catch (error) {
+      this.logout();
+    }
+  }
+
   logout() {
     localStorage.removeItem('authToken');
     localStorage.removeItem('authUser');
@@ -97,13 +114,17 @@ class AuthService {
   }
 
   refreshToken(token) {
-    return refresh(token).catch((error) => {
-      if (error.response) {
-        toastr.error(error.response.data.message);
-      } else {
-        console.log(error);
-      }
-    });
+    return refresh(token)
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        if (error.response) {
+          toastr.error(error.response.data.message);
+        } else {
+          console.log(error);
+        }
+      });
   }
 
   /**

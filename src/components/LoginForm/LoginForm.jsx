@@ -4,16 +4,19 @@ import './LoginForm.scss';
 import authService from '../../services/auth/AuthService';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 export default function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   function handleSubmit(e) {
     e.preventDefault();
 
     authService.login(username, password).then((response) => {
+      authService.saveToken(response.data.token, dispatch);
       navigate('/');
     });
   }

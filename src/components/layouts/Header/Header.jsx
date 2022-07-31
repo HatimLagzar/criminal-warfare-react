@@ -1,9 +1,10 @@
 import HeaderBar from './HeaderBar/HeaderBar';
 import StatsRow from './StatsRow/StatsRow';
-import authService from '../../../services/auth/AuthService';
+import { useSelector } from 'react-redux';
+import useAuthenticationStatus from '../../../hooks/auth/useAuthenticationStatus';
 
 const Header = () => {
-  const isLoggedIn = authService.hasBeenAuthenticated();
+  const isLoggedIn = useAuthenticationStatus();
 
   return (
     <div className='header'>

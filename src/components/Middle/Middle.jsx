@@ -1,9 +1,10 @@
 import authService from '../../services/auth/AuthService';
 import './Middle.scss';
 import Menu from './../Menu/Menu';
+import useAuthenticationStatus from '../../hooks/auth/useAuthenticationStatus';
 
 const Middle = (props) => {
-  const isLoggedIn = authService.hasBeenAuthenticated();
+  const isLoggedIn = useAuthenticationStatus();
 
   let topClasses = isLoggedIn
     ? 'middle-top'
