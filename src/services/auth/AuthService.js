@@ -2,6 +2,10 @@ import { login, refresh } from '../../api/login-api';
 import jwtDecode from 'jwt-decode';
 import { setToken, setUser } from '../../store/features/auth/authSlice';
 import toastr from 'toastr';
+import {
+  SERVER_ERROR,
+  UNPROCESSABLE_ENTITY,
+} from '../../utils/constants/response-codes';
 
 class AuthService {
   login(username, password) {
@@ -23,8 +27,14 @@ class AuthService {
       })
       .catch((error) => {
         if (error.response) {
-          if (error.response.status) {
-            toastr.error('Incorrect credentials!');
+          if (error.response.status === UNPROCESSABLE_ENTITY) {
+            toastr.warning(error.response.data.message);
+
+            return;
+          }
+
+          if (error.response.status === SERVER_ERROR) {
+            toastr.error(error.response.data.message);
 
             return;
           }
@@ -112,4 +122,6 @@ class AuthService {
   }
 }
 
-export default new AuthService();
+const authService = new AuthService();
+
+export default authService;

@@ -3,15 +3,19 @@ import InputGroup from '../forms/InputGroup/InputGroup';
 import './LoginForm.scss';
 import authService from '../../services/auth/AuthService';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    authService.login(username, password);
+    authService.login(username, password).then((response) => {
+      navigate('/');
+    });
   }
 
   return (
