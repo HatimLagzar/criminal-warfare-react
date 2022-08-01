@@ -61,13 +61,18 @@ class AuthService {
         this.saveToken(token, dispatch);
       }
     } catch (error) {
-      this.logout();
+      this.logout(dispatch);
     }
   }
 
-  logout() {
+  logout(dispatch = null) {
     localStorage.removeItem('authToken');
     localStorage.removeItem('authUser');
+
+    if (dispatch !== null) {
+      dispatch(setToken(null));
+      dispatch(setUser(null));
+    }
   }
 
   getAuthUser() {
