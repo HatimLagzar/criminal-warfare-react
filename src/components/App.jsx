@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import authService from '../services/auth/AuthService';
 import userService from '../services/auth/UserService';
 import { setGeneralInfo } from '../store/features/auth/authSlice';
@@ -11,10 +11,15 @@ import Router from './Router/Router';
 
 export default function App() {
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
 
   useEffect(() => {
-    authService.restoreLogin(dispatch);
+    if (token === null) {
+      authService.restoreLogin(dispatch);
+    }
+  }, [token]);
 
+  useEffect(() => {
     if (authService.isExpired() === false) {
       userService.fetchAuthenticatedUserInfo().then((response) => {
         if (response.status === HTTP_OK) {
