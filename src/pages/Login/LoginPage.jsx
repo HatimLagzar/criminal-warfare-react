@@ -6,7 +6,8 @@ import './LoginPage.scss';
 import Table from '../../components/tables/Table/Table';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import authService from '../../services/auth/AuthService';
 
 let usersStats = [
   ['Total Users', 'Last Hour', 'Last 24 Hours'],
@@ -53,6 +54,10 @@ export default function LoginPage() {
   useEffect(() => {
     document.title = 'Login | Criminal Warfare';
   });
+
+  if (authService.hasBeenAuthenticated() && authService.isExpired() === false) {
+    return <Navigate to={'/'} />;
+  }
 
   return (
     <>
