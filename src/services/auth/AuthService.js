@@ -95,7 +95,7 @@ class AuthService {
       const token = this.getToken();
       const user = jwtDecode(token);
 
-      return user.exp * 1000 + new Date().getTime() < new Date().getTime();
+      return user.exp * 1000 < new Date().getTime();
     }
 
     return true;
