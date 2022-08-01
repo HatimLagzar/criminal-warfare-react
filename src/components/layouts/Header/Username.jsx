@@ -1,8 +1,15 @@
-const Username = (props) => {
+import { Link } from 'react-router-dom';
+
+const Username = ({ generalInfo }) => {
   return (
     <div className={'user-info-name'}>
-      [<a href='/gang/31'>BLU</a>] <a href='/profile.php?id=2'>HaxXXxaH</a>{' '}
-      <span className={'user-info-id'}>[2]</span>
+      {generalInfo.hasOwnProperty('gangId') ? (
+        <Link to={'/gang/' + generalInfo.gangId}>[{generalInfo.gangTag}]</Link>
+      ) : (
+        ''
+      )}{' '}
+      <Link to={'/profile.php?id=' + generalInfo.id}>{generalInfo.name}</Link>{' '}
+      <span className={'user-info-id'}>[{generalInfo.id}]</span>
     </div>
   );
 };

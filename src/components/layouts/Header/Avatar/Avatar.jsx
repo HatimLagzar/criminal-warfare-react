@@ -1,9 +1,9 @@
-import avatar from '../../../../assets/img/avatars/2.png';
+import noAvatar from '../../../../assets/img/avatars/no-avatar.png';
 
-const Avatar = () => {
+const Avatar = ({ generalInfo }) => {
   return (
     <div className='user-info-avatar'>
-      <img className='avatar' src={avatar} />
+      <img className='avatar' src={generalInfo.avatar || noAvatar} />
     </div>
   );
 };
