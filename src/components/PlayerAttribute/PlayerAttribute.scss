@@ -5,9 +5,9 @@
   align-items: center;
   padding: 5px 15px;
 
-  .attribute-name {
+  .attribute-name,
+  .attribute-percentage {
     width: 25%;
-    text-align: center;
   }
 
   .attribute-name.refillable {
