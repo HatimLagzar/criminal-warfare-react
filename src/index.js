@@ -9,11 +9,9 @@ import './scss/app.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <ReduxProvider store={store}>
-        <App />
-      </ReduxProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+<BrowserRouter>
+    <ReduxProvider store={store}>
+        <App/>
+    </ReduxProvider>
+</BrowserRouter>
 );
