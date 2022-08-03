@@ -1,7 +1,6 @@
 import './Menu.scss';
 import MenuGroup from './../MenuGroup/MenuGroup';
 import MenuLink from './../MenuLink/MenuLink';
-import authService from '../../services/auth/AuthService';
 import useAuthenticationStatus from '../../hooks/auth/useAuthenticationStatus';
 
 const Menu = () => {
@@ -17,13 +16,13 @@ const Menu = () => {
   if (isLoggedIn) {
     menu = [
       { group: 'Useful' },
+      { link: '/', title: 'Home' },
+      { link: '/travel', title: 'Travel' },
+      { link: '/bank', title: 'Bank' },
       { link: '/criminal_pass', title: 'Criminal Pass' },
       { link: '/jobs', title: 'Job Clockin', highlight: true },
       { link: '/usersonline', title: 'Users Online' },
-      { link: '/home', title: 'Home' },
       { link: '/city', title: 'Sydney' },
-      { link: '/travel', title: 'Travel' },
-      { link: '/bank', title: 'Bank' },
       { link: '/inventory', title: 'Inventory' },
       { link: '/chat', title: 'Chat', badge: 1 },
       { link: '/mailbox', title: 'Mailbox', badge: 0 },
