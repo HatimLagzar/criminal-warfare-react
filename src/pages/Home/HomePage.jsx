@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import ContentArea from './../../components/ContentArea/ContentArea';
 import Table from './../../components/tables/Table/Table';
@@ -137,6 +137,10 @@ export default function HomePage() {
   );
   const battleStats = useSelector((state) => state.home.battleStats);
   const criminalCareer = useSelector((state) => state.home.criminalCareer);
+
+  useEffect(() => {
+    document.title = 'Home | Criminal Warfare';
+  });
 
   return (
     <>
