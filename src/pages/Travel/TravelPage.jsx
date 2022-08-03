@@ -1,11 +1,11 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import toastr from 'toastr';
-import {getAllCities, travel} from '../../api/travel-api';
+import { getAllCities, travel } from '../../api/travel-api';
 import Button from '../../components/buttons/Button/Button';
 import ContentArea from '../../components/ContentArea/ContentArea';
 import Table from '../../components/tables/Table/Table';
-import {formatMoney, formatNumber} from '../../utils/helpers/formatters';
-import ButtonForm from "../../components/forms/ButtonForm/ButtonForm";
+import { formatMoney, formatNumber } from '../../utils/helpers/formatters';
+import ButtonForm from '../../components/forms/ButtonForm/ButtonForm';
 
 export default function TravelPage() {
   const [cities, setCities] = useState(null);
@@ -30,17 +30,17 @@ export default function TravelPage() {
   }
 
   function handleTravel(cityId) {
-    setIsLoading(true)
+    setIsLoading(true);
 
     return travel(cityId)
-      .then(response => {
+      .then((response) => {
         toastr.success(response.data.message);
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response) {
-          toastr.error(error.response.data.message)
+          toastr.error(error.response.data.message);
         }
-      })
+      });
   }
 
   let citiesTable = [
@@ -50,19 +50,22 @@ export default function TravelPage() {
       formatMoney(city.cost),
       city.level,
       formatNumber(0),
-      <ButtonForm isLoading={isLoading} text={'Travel'} onSubmitHandler={() => {
-        handleTravel(city.id)
-          .then(() => {
-            setIsLoading(false)
-          })
-      }}></ButtonForm>,
+      <ButtonForm
+        isLoading={isLoading}
+        text={'Travel'}
+        onSubmitHandler={() => {
+          handleTravel(city.id).then(() => {
+            setIsLoading(false);
+          });
+        }}
+      ></ButtonForm>,
     ]),
   ];
 
   return (
     <>
       <ContentArea title={'Travel'}>
-        <Table data={citiesTable}/>
+        <Table data={citiesTable} />
       </ContentArea>
     </>
   );
