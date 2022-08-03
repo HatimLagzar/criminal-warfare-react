@@ -1,3 +1,4 @@
+import Input from '../Input/Input';
 import './InputGroup.scss';
 
 export default function InputGroup({
@@ -11,12 +12,7 @@ export default function InputGroup({
       <label className='label-form' htmlFor={id}>
         {label}
       </label>
-      <input
-        className='input-form'
-        type={type}
-        id={id}
-        onChange={handleInputChange}
-      />
+      <Input id={id} type={type} handleInputChange={handleInputChange} />
     </div>
   );
 }

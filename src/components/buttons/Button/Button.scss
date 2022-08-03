@@ -14,9 +14,7 @@
     background-color: #802627;
 
     &:disabled {
-      background-color: #ccc;
-      color: black;
-      cursor: not-allowed;
+      text-shadow: none;
     }
   }
 }
