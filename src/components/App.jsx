@@ -39,7 +39,7 @@ export default function App() {
         }
       });
     }
-  }, []);
+  }, [token]);
 
   return (
     <>
