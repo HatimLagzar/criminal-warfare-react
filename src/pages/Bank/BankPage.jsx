@@ -9,17 +9,18 @@ import FlexRow from '../../components/layouts/FlexRow/FlexRow';
 import FlexElement from '../../components/layouts/FlexElement/FlexElement';
 import WithdrawForm from './WithdrawForm';
 import DepositForm from './DepositForm';
+import ListQuickWithdrawals from './ListQuickWithdrawals';
 
 export default function BankPage() {
-  const [bankInfo, setBankInfo] = useState(null);
+  const [bankData, setBankData] = useState(null);
 
   useEffect(() => {
     document.title = 'Bank | Criminal Warfare';
 
-    if (bankInfo === null) {
+    if (bankData === null) {
       getBankInfo()
         .then((response) => {
-          setBankInfo(response.data.bankInfo);
+          setBankData(response.data);
         })
         .catch((error) => {
           if (error.response) {
@@ -29,9 +30,11 @@ export default function BankPage() {
     }
   }, []);
 
-  if (bankInfo === null) {
+  if (bankData === null) {
     return 'Loading...';
   }
+
+  const bankInfo = bankData.bankInfo;
 
   const bankAccountInfoTable = [
     ['Balance', formatMoney(bankInfo.bank)],
@@ -39,26 +42,46 @@ export default function BankPage() {
     ['Interest Prospects', formatMoney(bankInfo.bank / 100)],
   ];
 
-  return (
-    <FlexRow>
-      <FlexElement>
-        <ContentArea title={'Bank Account Info'}>
-          <Table noHeader data={bankAccountInfoTable} />
-        </ContentArea>
-      </FlexElement>
+  const bankStatementTable = [
+    ['Date/Time	', 'Withdrawal', 'Deposit', 'Notes'],
+    ...bankData.bankLogs.map((row) => [
+      row.timestamp,
+      row.withdrawal,
+      row.deposit,
+      row.note,
+    ]),
+  ];
 
-      <FlexElement>
-        <ContentArea title={'Manage Money'}>
-          <FlexRow className={'justify-content-between p-15'}>
-            <div>
-              <WithdrawForm />
-            </div>
-            <div>
-              <DepositForm />
-            </div>
-          </FlexRow>
-        </ContentArea>
-      </FlexElement>
-    </FlexRow>
+  console.log(bankStatementTable);
+
+  return (
+    <>
+      <FlexRow>
+        <FlexElement>
+          <ContentArea title={'Bank Account Info'}>
+            <Table noHeader data={bankAccountInfoTable} />
+          </ContentArea>
+        </FlexElement>
+
+        <FlexElement>
+          <ContentArea title={'Manage Money'}>
+            <FlexRow className={'justify-content-between p-15'}>
+              <div>
+                <WithdrawForm />
+              </div>
+              <div>
+                <DepositForm />
+              </div>
+            </FlexRow>
+          </ContentArea>
+        </FlexElement>
+      </FlexRow>
+      <ContentArea title='Quick Withdrawal'>
+        <ListQuickWithdrawals options={bankData.quickWithdrawalOptions} />
+      </ContentArea>
+      <ContentArea title='Bank Statement'>
+        <Table data={bankStatementTable} />
+      </ContentArea>
+    </>
   );
 }
