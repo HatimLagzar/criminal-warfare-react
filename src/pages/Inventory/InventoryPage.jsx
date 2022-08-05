@@ -360,7 +360,130 @@ export default function InventoryPage() {
         <FlexRow>
           {inventory.userInventory.armors.length > 0
             ? inventory.userInventory.armors.map((armor, index) => (
-                <InventoryItem key={index + '-armors'} item={armor} />
+                <InventoryItem
+                  key={index + '-armors'}
+                  item={armor}
+                  handleEquipItem={() => {
+                    equipItem('armor', armor.itemid)
+                      .then((response) => {
+                        debugger;
+                        const itemInInventory =
+                          inventory.userInventory.armors.find(
+                            (item) => item.id === armor.id
+                          );
+
+                        const equippedItemInInventory =
+                          inventory.userInventory.armors.find(
+                            (item) =>
+                              item.id === inventory.equippedItems.armor.id
+                          );
+
+                        if (itemInInventory.qty === 1) {
+                          if (equippedItemInInventory === undefined) {
+                            setInventory({
+                              ...inventory,
+                              equippedItems: {
+                                ...inventory.equippedItems,
+                                armor,
+                              },
+                              userInventory: {
+                                ...inventory.userInventory,
+                                armors: [
+                                  ...inventory.userInventory.armors.filter(
+                                    (item) =>
+                                      item.id !== itemInInventory.id &&
+                                      item.id !== equippedItemInInventory.id
+                                  ),
+                                  { ...inventory.equippedItems.armor, qty: 1 },
+                                ],
+                              },
+                            });
+                          } else {
+                            equippedItemInInventory.qty++;
+
+                            setInventory({
+                              ...inventory,
+                              equippedItems: {
+                                ...inventory.equippedItems,
+                                armor,
+                              },
+                              userInventory: {
+                                ...inventory.userInventory,
+                                armors: [
+                                  ...inventory.userInventory.armors.filter(
+                                    (item) =>
+                                      item.id !== itemInInventory.id &&
+                                      item.id !== equippedItemInInventory.id
+                                  ),
+                                  { ...equippedItemInInventory },
+                                ],
+                              },
+                            });
+                          }
+                        } else {
+                          if (equippedItemInInventory === undefined) {
+                            itemInInventory.qty--;
+
+                            setInventory({
+                              ...inventory,
+                              equippedItems: {
+                                ...inventory.equippedItems,
+                                armor,
+                              },
+                              userInventory: {
+                                ...inventory.userInventory,
+                                armors: [
+                                  ...inventory.userInventory.armors.filter(
+                                    (item) =>
+                                      item.id !== itemInInventory.id &&
+                                      item.id !==
+                                        inventory.equippedItems.armor.id
+                                  ),
+                                  itemInInventory,
+                                  { ...inventory.equippedItems.armor, qty: 1 },
+                                ],
+                              },
+                            });
+                          } else {
+                            itemInInventory.qty--;
+                            equippedItemInInventory.qty++;
+
+                            if (
+                              equippedItemInInventory.id === itemInInventory.id
+                            ) {
+                              return;
+                            }
+                            setInventory({
+                              ...inventory,
+                              equippedItems: {
+                                ...inventory.equippedItems,
+                                armor,
+                              },
+                              userInventory: {
+                                ...inventory.userInventory,
+                                armors: [
+                                  ...inventory.userInventory.armors.filter(
+                                    (item) =>
+                                      item.id !== itemInInventory.id &&
+                                      item.id !== equippedItemInInventory.id
+                                  ),
+                                  itemInInventory,
+                                  { ...equippedItemInInventory },
+                                ],
+                              },
+                            });
+                          }
+                        }
+
+                        toastr.success(response.data.message);
+                      })
+                      .catch((error) => {
+                        if (error.response) {
+                          toastr.error(error.response.data.message);
+                        }
+                      });
+                  }}
+                />
               ))
             : 'No armors found!'}
         </FlexRow>
@@ -368,8 +491,131 @@ export default function InventoryPage() {
       <ContentArea title={'Shoes'} centerHeader>
         <FlexRow>
           {inventory.userInventory.shoes.length > 0
-            ? inventory.userInventory.shoes.map((shoe, index) => (
-                <InventoryItem key={index + '-shoes'} item={shoe} />
+            ? inventory.userInventory.shoes.map((shoes, index) => (
+                <InventoryItem
+                  key={index + '-shoes'}
+                  item={shoes}
+                  handleEquipItem={() => {
+                    equipItem('shoes', shoes.itemid)
+                      .then((response) => {
+                        debugger;
+                        const itemInInventory =
+                          inventory.userInventory.shoes.find(
+                            (item) => item.id === shoes.id
+                          );
+
+                        const equippedItemInInventory =
+                          inventory.userInventory.shoes.find(
+                            (item) =>
+                              item.id === inventory.equippedItems.shoes.id
+                          );
+
+                        if (itemInInventory.qty === 1) {
+                          if (equippedItemInInventory === undefined) {
+                            setInventory({
+                              ...inventory,
+                              equippedItems: {
+                                ...inventory.equippedItems,
+                                shoes,
+                              },
+                              userInventory: {
+                                ...inventory.userInventory,
+                                shoes: [
+                                  ...inventory.userInventory.shoes.filter(
+                                    (item) =>
+                                      item.id !== itemInInventory.id &&
+                                      item.id !== equippedItemInInventory.id
+                                  ),
+                                  { ...inventory.equippedItems.armor, qty: 1 },
+                                ],
+                              },
+                            });
+                          } else {
+                            equippedItemInInventory.qty++;
+
+                            setInventory({
+                              ...inventory,
+                              equippedItems: {
+                                ...inventory.equippedItems,
+                                shoes,
+                              },
+                              userInventory: {
+                                ...inventory.userInventory,
+                                shoes: [
+                                  ...inventory.userInventory.shoes.filter(
+                                    (item) =>
+                                      item.id !== itemInInventory.id &&
+                                      item.id !== equippedItemInInventory.id
+                                  ),
+                                  { ...equippedItemInInventory },
+                                ],
+                              },
+                            });
+                          }
+                        } else {
+                          if (equippedItemInInventory === undefined) {
+                            itemInInventory.qty--;
+
+                            setInventory({
+                              ...inventory,
+                              equippedItems: {
+                                ...inventory.equippedItems,
+                                shoes,
+                              },
+                              userInventory: {
+                                ...inventory.userInventory,
+                                shoes: [
+                                  ...inventory.userInventory.shoes.filter(
+                                    (item) =>
+                                      item.id !== itemInInventory.id &&
+                                      item.id !==
+                                        inventory.equippedItems.shoes.id
+                                  ),
+                                  itemInInventory,
+                                  { ...inventory.equippedItems.shoes, qty: 1 },
+                                ],
+                              },
+                            });
+                          } else {
+                            itemInInventory.qty--;
+                            equippedItemInInventory.qty++;
+
+                            if (
+                              equippedItemInInventory.id === itemInInventory.id
+                            ) {
+                              return;
+                            }
+                            setInventory({
+                              ...inventory,
+                              equippedItems: {
+                                ...inventory.equippedItems,
+                                shoes,
+                              },
+                              userInventory: {
+                                ...inventory.userInventory,
+                                shoes: [
+                                  ...inventory.userInventory.shoes.filter(
+                                    (item) =>
+                                      item.id !== itemInInventory.id &&
+                                      item.id !== equippedItemInInventory.id
+                                  ),
+                                  itemInInventory,
+                                  { ...equippedItemInInventory },
+                                ],
+                              },
+                            });
+                          }
+                        }
+
+                        toastr.success(response.data.message);
+                      })
+                      .catch((error) => {
+                        if (error.response) {
+                          toastr.error(error.response.data.message);
+                        }
+                      });
+                  }}
+                />
               ))
             : 'No shoes found!'}
         </FlexRow>
