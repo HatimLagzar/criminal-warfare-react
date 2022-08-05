@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ButtonForm from '../forms/ButtonForm/ButtonForm';
 import './InventoryItem.scss';
 
-export default function InventoryItem({ item }) {
+export default function InventoryItem({ item, handleEquipItem }) {
   return (
     <div className='inventory-item'>
       <div className='inventory-item-left'>
@@ -29,7 +29,11 @@ export default function InventoryItem({ item }) {
           <Link className='btn btn-link' to={'items/market/' + item.id}>
             [Market]
           </Link>
-          <ButtonForm text={'[Equip]'} classes={'btn-link'} />
+          <ButtonForm
+            text={'[Equip]'}
+            classes={'btn-link'}
+            onSubmitHandler={handleEquipItem}
+          />
         </div>
       </div>
     </div>

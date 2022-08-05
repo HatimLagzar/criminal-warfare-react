@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import toastr from 'toastr';
 import {
+  equipItem,
   getAuthenticatedUserInventory,
   unequipItem,
 } from '../../api/inventory-api';
@@ -227,7 +228,130 @@ export default function InventoryPage() {
         <FlexRow>
           {inventory.userInventory.weapons.length > 0
             ? inventory.userInventory.weapons.map((weapon, index) => (
-                <InventoryItem key={index + '-weapons'} item={weapon} />
+                <InventoryItem
+                  key={index + '-weapons'}
+                  item={weapon}
+                  handleEquipItem={() => {
+                    equipItem('weapon', weapon.itemid)
+                      .then((response) => {
+                        debugger;
+                        const itemInInventory =
+                          inventory.userInventory.weapons.find(
+                            (item) => item.id === weapon.id
+                          );
+
+                        const equippedItemInInventory =
+                          inventory.userInventory.weapons.find(
+                            (item) =>
+                              item.id === inventory.equippedItems.weapon.id
+                          );
+
+                        if (itemInInventory.qty === 1) {
+                          if (equippedItemInInventory === undefined) {
+                            setInventory({
+                              ...inventory,
+                              equippedItems: {
+                                ...inventory.equippedItems,
+                                weapon,
+                              },
+                              userInventory: {
+                                ...inventory.userInventory,
+                                weapons: [
+                                  ...inventory.userInventory.weapons.filter(
+                                    (item) =>
+                                      item.id !== itemInInventory.id &&
+                                      item.id !== equippedItemInInventory.id
+                                  ),
+                                  { ...inventory.equippedItems.weapon, qty: 1 },
+                                ],
+                              },
+                            });
+                          } else {
+                            equippedItemInInventory.qty++;
+
+                            setInventory({
+                              ...inventory,
+                              equippedItems: {
+                                ...inventory.equippedItems,
+                                weapon,
+                              },
+                              userInventory: {
+                                ...inventory.userInventory,
+                                weapons: [
+                                  ...inventory.userInventory.weapons.filter(
+                                    (item) =>
+                                      item.id !== itemInInventory.id &&
+                                      item.id !== equippedItemInInventory.id
+                                  ),
+                                  { ...equippedItemInInventory },
+                                ],
+                              },
+                            });
+                          }
+                        } else {
+                          if (equippedItemInInventory === undefined) {
+                            itemInInventory.qty--;
+
+                            setInventory({
+                              ...inventory,
+                              equippedItems: {
+                                ...inventory.equippedItems,
+                                weapon,
+                              },
+                              userInventory: {
+                                ...inventory.userInventory,
+                                weapons: [
+                                  ...inventory.userInventory.weapons.filter(
+                                    (item) =>
+                                      item.id !== itemInInventory.id &&
+                                      item.id !==
+                                        inventory.equippedItems.weapon.id
+                                  ),
+                                  itemInInventory,
+                                  { ...inventory.equippedItems.weapon, qty: 1 },
+                                ],
+                              },
+                            });
+                          } else {
+                            itemInInventory.qty--;
+                            equippedItemInInventory.qty++;
+
+                            if (
+                              equippedItemInInventory.id === itemInInventory.id
+                            ) {
+                              return;
+                            }
+                            setInventory({
+                              ...inventory,
+                              equippedItems: {
+                                ...inventory.equippedItems,
+                                weapon,
+                              },
+                              userInventory: {
+                                ...inventory.userInventory,
+                                weapons: [
+                                  ...inventory.userInventory.weapons.filter(
+                                    (item) =>
+                                      item.id !== itemInInventory.id &&
+                                      item.id !== equippedItemInInventory.id
+                                  ),
+                                  itemInInventory,
+                                  { ...equippedItemInInventory },
+                                ],
+                              },
+                            });
+                          }
+                        }
+
+                        toastr.success(response.data.message);
+                      })
+                      .catch((error) => {
+                        if (error.response) {
+                          toastr.error(error.response.data.message);
+                        }
+                      });
+                  }}
+                />
               ))
             : 'No weapons found!'}
         </FlexRow>

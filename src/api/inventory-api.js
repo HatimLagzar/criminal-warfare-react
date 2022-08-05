@@ -19,3 +19,18 @@ export const unequipItem = (type) => {
     },
   });
 };
+
+export const equipItem = (type, itemId) => {
+  const formData = new FormData();
+  formData.set('type', type);
+
+  return axios.post(
+    'http://127.0.0.1:8000/api/inventory/' + itemId + '/equip',
+    formData,
+    {
+      headers: {
+        Authorization: `Bearer ${authService.getToken()}`,
+      },
+    }
+  );
+};
