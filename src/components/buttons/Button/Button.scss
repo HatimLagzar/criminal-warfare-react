@@ -17,4 +17,21 @@
       text-shadow: none;
     }
   }
+
+  &.btn-link {
+    background: none;
+    border-radius: 0;
+    min-width: auto;
+    border: none;
+    font-size: 10px;
+    padding: 0;
+    box-shadow: none;
+    text-shadow: none;
+    color: #c90;
+    text-decoration: none;
+
+    &:hover {
+      color: #888;
+    }
+  }
 }

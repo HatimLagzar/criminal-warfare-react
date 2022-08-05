@@ -1,20 +1,22 @@
 import './ContentArea.scss';
 
 const ContentArea = (props) => {
+  const { centerHeader, spacer, title } = props;
+
   let headerClass = 'content-h';
   let contentClass = 'content-c';
-  if (props.centerHeader) {
+  if (centerHeader) {
     headerClass += ' ' + 'content-h-center';
   }
 
-  if (props.spacer) {
+  if (spacer) {
     headerClass += ' ' + 'spacer';
     contentClass += ' ' + 'spacer';
   }
 
   return (
     <>
-      <div className={headerClass}>{props.title}</div>
+      <div className={headerClass}>{title}</div>
       <div className={contentClass}>{props.children}</div>
     </>
   );

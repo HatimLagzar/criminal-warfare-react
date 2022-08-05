@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import authService from '../services/auth/AuthService';
 import userService from '../services/auth/UserService';
 import { setGeneralInfo } from '../store/features/auth/authSlice';
@@ -18,6 +19,7 @@ import Router from './Router/Router';
 export default function App() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token === null) {
@@ -38,6 +40,8 @@ export default function App() {
           );
         }
       });
+    } else {
+      navigate('/login');
     }
   }, [token]);
 

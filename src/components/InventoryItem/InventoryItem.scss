@@ -1,0 +1,40 @@
+.inventory-item {
+  width: 48%;
+  display: flex;
+  border-right: 1px solid #000;
+  padding: 7px;
+
+  &:nth-of-type(2n),
+  &:last-of-type {
+    border-right: none;
+  }
+
+  .inventory-item-image {
+    width: 75px;
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .inventory-item-name {
+    margin: 0 0 5px 0;
+    padding: 0;
+  }
+
+  .inventory-item-quantity {
+    font-size: 10px;
+    margin: 0;
+  }
+
+  .inventory-item-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .inventory-item-actions {
+      margin-top: 20px;
+    }
+  }
+}
