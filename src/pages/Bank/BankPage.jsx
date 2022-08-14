@@ -1,10 +1,10 @@
 import './BankPage.scss';
 import ContentArea from '../../components/ContentArea/ContentArea';
 import Table from '../../components/tables/Table/Table';
-import { useEffect, useState } from 'react';
-import { getBankInfo } from '../../api/bank-api';
+import {useEffect, useState} from 'react';
+import {getBankInfo} from '../../api/bank-api';
 import toastr from 'toastr';
-import { formatMoney } from '../../utils/helpers/formatters';
+import {formatMoney} from '../../utils/helpers/formatters';
 import FlexRow from '../../components/layouts/FlexRow/FlexRow';
 import FlexElement from '../../components/layouts/FlexElement/FlexElement';
 import WithdrawForm from './WithdrawForm';
@@ -28,7 +28,7 @@ export default function BankPage() {
           }
         });
     }
-  }, []);
+  });
 
   if (bankData === null) {
     return 'Loading...';
