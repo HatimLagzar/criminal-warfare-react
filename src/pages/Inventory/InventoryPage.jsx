@@ -97,6 +97,180 @@ export default function InventoryPage() {
     }
   }
 
+  /**
+   * Equip an item on the state
+   *
+   * @param type {string}
+   */
+  function handleEquip(type, selectedItem) {
+    let itemInInventory;
+    let typeSingularName;
+    let typePluralName;
+
+    if (type === 'weapon') {
+      itemInInventory = inventory.userInventory.weapons.find(
+        (item) => item.id === selectedItem.id
+      );
+      typeSingularName = 'weapon'
+      typePluralName = 'weapons'
+    } else if (type === 'armor') {
+      itemInInventory = inventory.userInventory.armors.find(
+        (item) => item.id === selectedItem.id
+      );
+      typeSingularName = 'armor'
+      typePluralName = 'armors'
+    } else {
+      itemInInventory = inventory.userInventory.shoes.find(
+        (item) => item.id === selectedItem.id
+      );
+      typeSingularName = 'shoes'
+      typePluralName = 'shoes'
+    }
+
+    const equippedItemInInventory = inventory.equippedItems[typeSingularName]
+      ? inventory.userInventory[typePluralName].find(
+        (item) =>
+          item.id === inventory.equippedItems[typeSingularName].id
+      )
+      : undefined;
+
+    if (itemInInventory.qty === 1) {
+      if (equippedItemInInventory === undefined) {
+        if (inventory.equippedItems[typeSingularName]) {
+          setInventory({
+            ...inventory,
+            equippedItems: {
+              ...inventory.equippedItems,
+              [typeSingularName]: selectedItem,
+            },
+            userInventory: {
+              ...inventory.userInventory,
+              [typePluralName]: [
+                ...inventory.userInventory[typePluralName].filter(
+                  (item) =>
+                    item.id !== itemInInventory.id &&
+                    item.id !== selectedItem.id
+                ),
+                {...inventory.equippedItems.weapon, qty: 1},
+              ],
+            },
+          });
+        } else {
+          setInventory({
+            ...inventory,
+            equippedItems: {
+              ...inventory.equippedItems,
+              [typeSingularName]: selectedItem,
+            },
+            userInventory: {
+              ...inventory.userInventory,
+              [typePluralName]: [
+                ...inventory.userInventory[typePluralName].filter(
+                  (item) =>
+                    item.id !== itemInInventory.id &&
+                    item.id !== selectedItem.id
+                ),
+              ],
+            },
+          });
+        }
+      } else {
+        equippedItemInInventory.qty++;
+
+        setInventory({
+          ...inventory,
+          equippedItems: {
+            ...inventory.equippedItems,
+            [typeSingularName]: selectedItem,
+          },
+          userInventory: {
+            ...inventory.userInventory,
+            [typePluralName]: [
+              ...inventory.userInventory[typePluralName].filter(
+                (item) =>
+                  item.id !== itemInInventory.id &&
+                  item.id !== equippedItemInInventory.id
+              ),
+              {...equippedItemInInventory},
+            ],
+          },
+        });
+      }
+    } else {
+      if (equippedItemInInventory === undefined) {
+        itemInInventory.qty--;
+
+        if (inventory.equippedItems[typeSingularName]) {
+          setInventory({
+            ...inventory,
+            equippedItems: {
+              ...inventory.equippedItems,
+              [typeSingularName]: selectedItem,
+            },
+            userInventory: {
+              ...inventory.userInventory,
+              [typePluralName]: [
+                ...inventory.userInventory.weapons.filter(
+                  (item) =>
+                    item.id !== itemInInventory.id &&
+                    item.id !== selectedItem.id
+                ),
+                itemInInventory,
+                {...inventory.equippedItems[typeSingularName], qty: 1},
+              ],
+            },
+          });
+        } else {
+          setInventory({
+            ...inventory,
+            equippedItems: {
+              ...inventory.equippedItems,
+              [typeSingularName]: selectedItem,
+            },
+            userInventory: {
+              ...inventory.userInventory,
+              [typePluralName]: [
+                ...inventory.userInventory[typePluralName].filter(
+                  (item) =>
+                    item.id !== itemInInventory.id &&
+                    item.id !== selectedItem.id
+                ),
+                itemInInventory,
+              ],
+            },
+          });
+        }
+      } else {
+        itemInInventory.qty--;
+        equippedItemInInventory.qty++;
+
+        if (equippedItemInInventory.id === itemInInventory.id) {
+          return;
+        }
+
+        setInventory({
+          ...inventory,
+          equippedItems: {
+            ...inventory.equippedItems,
+            [typeSingularName]: selectedItem,
+          },
+          userInventory: {
+            ...inventory.userInventory,
+            [typePluralName]: [
+              ...inventory.userInventory[typePluralName].filter(
+                (item) =>
+                  item.id !== itemInInventory.id &&
+                  item.id !== equippedItemInInventory.id
+              ),
+              itemInInventory,
+              {...equippedItemInInventory},
+            ],
+          },
+        });
+      }
+    }
+  }
+
   return (
     <div className='inventory-page'>
       <ContentArea title='Equipped Items'>
@@ -181,157 +355,7 @@ export default function InventoryPage() {
                 handleEquipItem={() => {
                   equipItem('weapon', weapon.itemid || weapon.id)
                     .then((response) => {
-                      debugger
-
-                      const itemInInventory =
-                        inventory.userInventory.weapons.find(
-                          (item) => item.id === weapon.id
-                        );
-
-                      const equippedItemInInventory = inventory.equippedItems
-                        .weapon
-                        ? inventory.userInventory.weapons.find(
-                          (item) =>
-                            item.id === inventory.equippedItems.weapon.id
-                        )
-                        : undefined;
-
-                      if (itemInInventory.qty === 1) {
-                        if (equippedItemInInventory === undefined) {
-                          if (inventory.equippedItems.weapon) {
-                            setInventory({
-                              ...inventory,
-                              equippedItems: {
-                                ...inventory.equippedItems,
-                                weapon,
-                              },
-                              userInventory: {
-                                ...inventory.userInventory,
-                                weapons: [
-                                  ...inventory.userInventory.weapons.filter(
-                                    (item) =>
-                                      item.id !== itemInInventory.id &&
-                                      item.id !== weapon.id
-                                  ),
-                                  {...inventory.equippedItems.weapon, qty: 1},
-                                ],
-                              },
-                            });
-                          } else {
-                            setInventory({
-                              ...inventory,
-                              equippedItems: {
-                                ...inventory.equippedItems,
-                                weapon,
-                              },
-                              userInventory: {
-                                ...inventory.userInventory,
-                                weapons: [
-                                  ...inventory.userInventory.weapons.filter(
-                                    (item) =>
-                                      item.id !== itemInInventory.id &&
-                                      item.id !== weapon.id
-                                  ),
-                                ],
-                              },
-                            });
-                          }
-                        } else {
-                          equippedItemInInventory.qty++;
-
-                          setInventory({
-                            ...inventory,
-                            equippedItems: {
-                              ...inventory.equippedItems,
-                              weapon,
-                            },
-                            userInventory: {
-                              ...inventory.userInventory,
-                              weapons: [
-                                ...inventory.userInventory.weapons.filter(
-                                  (item) =>
-                                    item.id !== itemInInventory.id &&
-                                    item.id !== equippedItemInInventory.id
-                                ),
-                                {...equippedItemInInventory},
-                              ],
-                            },
-                          });
-                        }
-                      } else {
-                        if (equippedItemInInventory === undefined) {
-                          itemInInventory.qty--;
-
-                          if (inventory.equippedItems.weapon) {
-                            setInventory({
-                              ...inventory,
-                              equippedItems: {
-                                ...inventory.equippedItems,
-                                weapon,
-                              },
-                              userInventory: {
-                                ...inventory.userInventory,
-                                weapons: [
-                                  ...inventory.userInventory.weapons.filter(
-                                    (item) =>
-                                      item.id !== itemInInventory.id &&
-                                      item.id !== weapon.id
-                                  ),
-                                  itemInInventory,
-                                  {...inventory.equippedItems.weapon, qty: 1},
-                                ],
-                              },
-                            });
-                          } else {
-                            setInventory({
-                              ...inventory,
-                              equippedItems: {
-                                ...inventory.equippedItems,
-                                weapon,
-                              },
-                              userInventory: {
-                                ...inventory.userInventory,
-                                weapons: [
-                                  ...inventory.userInventory.weapons.filter(
-                                    (item) =>
-                                      item.id !== itemInInventory.id &&
-                                      item.id !== weapon.id
-                                  ),
-                                  itemInInventory,
-                                ],
-                              },
-                            });
-                          }
-                        } else {
-                          itemInInventory.qty--;
-                          equippedItemInInventory.qty++;
-
-                          if (
-                            equippedItemInInventory.id === itemInInventory.id
-                          ) {
-                            return;
-                          }
-                          setInventory({
-                            ...inventory,
-                            equippedItems: {
-                              ...inventory.equippedItems,
-                              weapon,
-                            },
-                            userInventory: {
-                              ...inventory.userInventory,
-                              weapons: [
-                                ...inventory.userInventory.weapons.filter(
-                                  (item) =>
-                                    item.id !== itemInInventory.id &&
-                                    item.id !== equippedItemInInventory.id
-                                ),
-                                itemInInventory,
-                                {...equippedItemInInventory},
-                              ],
-                            },
-                          });
-                        }
-                      }
+                      handleEquip('weapon', weapon)
 
                       toastr.success(response.data.message);
                     })
@@ -358,155 +382,7 @@ export default function InventoryPage() {
                 handleEquipItem={() => {
                   equipItem('armor', armor.itemid || armor.id)
                     .then((response) => {
-                      const itemInInventory =
-                        inventory.userInventory.armors.find(
-                          (item) => item.id === armor.id
-                        );
-
-                      const equippedItemInInventory = inventory.equippedItems
-                        .armor
-                        ? inventory.userInventory.armors.find(
-                          (item) =>
-                            item.id === inventory.equippedItems.armor.id
-                        )
-                        : undefined;
-
-                      if (itemInInventory.qty === 1) {
-                        if (equippedItemInInventory === undefined) {
-                          if (inventory.equippedItems.armor) {
-                            setInventory({
-                              ...inventory,
-                              equippedItems: {
-                                ...inventory.equippedItems,
-                                armor,
-                              },
-                              userInventory: {
-                                ...inventory.userInventory,
-                                armors: [
-                                  ...inventory.userInventory.armors.filter(
-                                    (item) =>
-                                      item.id !== itemInInventory.id &&
-                                      item.id !== armor.id
-                                  ),
-                                  {...inventory.equippedItems.armor, qty: 1},
-                                ],
-                              },
-                            });
-                          } else {
-                            setInventory({
-                              ...inventory,
-                              equippedItems: {
-                                ...inventory.equippedItems,
-                                armor,
-                              },
-                              userInventory: {
-                                ...inventory.userInventory,
-                                armors: [
-                                  ...inventory.userInventory.armors.filter(
-                                    (item) =>
-                                      item.id !== itemInInventory.id &&
-                                      item.id !== armor.id
-                                  ),
-                                ],
-                              },
-                            });
-                          }
-                        } else {
-                          equippedItemInInventory.qty++;
-
-                          setInventory({
-                            ...inventory,
-                            equippedItems: {
-                              ...inventory.equippedItems,
-                              armor,
-                            },
-                            userInventory: {
-                              ...inventory.userInventory,
-                              armors: [
-                                ...inventory.userInventory.armors.filter(
-                                  (item) =>
-                                    item.id !== itemInInventory.id &&
-                                    item.id !== equippedItemInInventory.id
-                                ),
-                                {...equippedItemInInventory},
-                              ],
-                            },
-                          });
-                        }
-                      } else {
-                        if (equippedItemInInventory === undefined) {
-                          itemInInventory.qty--;
-
-                          if (inventory.equippedItems.armor) {
-                            setInventory({
-                              ...inventory,
-                              equippedItems: {
-                                ...inventory.equippedItems,
-                                armor,
-                              },
-                              userInventory: {
-                                ...inventory.userInventory,
-                                armors: [
-                                  ...inventory.userInventory.armors.filter(
-                                    (item) =>
-                                      item.id !== itemInInventory.id &&
-                                      item.id !== armor.id
-                                  ),
-                                  itemInInventory,
-                                  {...inventory.equippedItems.armor, qty: 1},
-                                ],
-                              },
-                            });
-                          } else {
-                            setInventory({
-                              ...inventory,
-                              equippedItems: {
-                                ...inventory.equippedItems,
-                                armor,
-                              },
-                              userInventory: {
-                                ...inventory.userInventory,
-                                armors: [
-                                  ...inventory.userInventory.armors.filter(
-                                    (item) =>
-                                      item.id !== itemInInventory.id &&
-                                      item.id !== armor.id
-                                  ),
-                                  itemInInventory,
-                                ],
-                              },
-                            });
-                          }
-                        } else {
-                          itemInInventory.qty--;
-                          equippedItemInInventory.qty++;
-
-                          if (
-                            equippedItemInInventory.id === itemInInventory.id
-                          ) {
-                            return;
-                          }
-                          setInventory({
-                            ...inventory,
-                            equippedItems: {
-                              ...inventory.equippedItems,
-                              armor,
-                            },
-                            userInventory: {
-                              ...inventory.userInventory,
-                              armors: [
-                                ...inventory.userInventory.armors.filter(
-                                  (item) =>
-                                    item.id !== itemInInventory.id &&
-                                    item.id !== equippedItemInInventory.id
-                                ),
-                                itemInInventory,
-                                {...equippedItemInInventory},
-                              ],
-                            },
-                          });
-                        }
-                      }
+                      handleEquip('armor', armor)
 
                       toastr.success(response.data.message);
                     })
@@ -533,155 +409,7 @@ export default function InventoryPage() {
                 handleEquipItem={() => {
                   equipItem('shoes', shoes.itemid || shoes.id)
                     .then((response) => {
-                      const itemInInventory =
-                        inventory.userInventory.shoes.find(
-                          (item) => item.id === shoes.id
-                        );
-
-                      const equippedItemInInventory = inventory.equippedItems
-                        .shoes
-                        ? inventory.userInventory.shoes.find(
-                          (item) =>
-                            item.id === inventory.equippedItems.shoes.id
-                        )
-                        : undefined;
-
-                      if (itemInInventory.qty === 1) {
-                        if (equippedItemInInventory === undefined) {
-                          if (inventory.equippedItems.shoes) {
-                            setInventory({
-                              ...inventory,
-                              equippedItems: {
-                                ...inventory.equippedItems,
-                                shoes,
-                              },
-                              userInventory: {
-                                ...inventory.userInventory,
-                                shoes: [
-                                  ...inventory.userInventory.shoes.filter(
-                                    (item) =>
-                                      item.id !== itemInInventory.id &&
-                                      item.id !== shoes.id
-                                  ),
-                                  {...inventory.equippedItems.armor, qty: 1},
-                                ],
-                              },
-                            });
-                          } else {
-                            setInventory({
-                              ...inventory,
-                              equippedItems: {
-                                ...inventory.equippedItems,
-                                shoes,
-                              },
-                              userInventory: {
-                                ...inventory.userInventory,
-                                shoes: [
-                                  ...inventory.userInventory.shoes.filter(
-                                    (item) =>
-                                      item.id !== itemInInventory.id &&
-                                      item.id !== shoes.id
-                                  ),
-                                ],
-                              },
-                            });
-                          }
-                        } else {
-                          equippedItemInInventory.qty++;
-
-                          setInventory({
-                            ...inventory,
-                            equippedItems: {
-                              ...inventory.equippedItems,
-                              shoes,
-                            },
-                            userInventory: {
-                              ...inventory.userInventory,
-                              shoes: [
-                                ...inventory.userInventory.shoes.filter(
-                                  (item) =>
-                                    item.id !== itemInInventory.id &&
-                                    item.id !== equippedItemInInventory.id
-                                ),
-                                {...equippedItemInInventory},
-                              ],
-                            },
-                          });
-                        }
-                      } else {
-                        if (equippedItemInInventory === undefined) {
-                          itemInInventory.qty--;
-
-                          if (inventory.equippedItems.shoes) {
-                            setInventory({
-                              ...inventory,
-                              equippedItems: {
-                                ...inventory.equippedItems,
-                                shoes,
-                              },
-                              userInventory: {
-                                ...inventory.userInventory,
-                                shoes: [
-                                  ...inventory.userInventory.shoes.filter(
-                                    (item) =>
-                                      item.id !== itemInInventory.id &&
-                                      item.id !== shoes.id
-                                  ),
-                                  itemInInventory,
-                                  {...inventory.equippedItems.shoes, qty: 1},
-                                ],
-                              },
-                            });
-                          } else {
-                            setInventory({
-                              ...inventory,
-                              equippedItems: {
-                                ...inventory.equippedItems,
-                                shoes,
-                              },
-                              userInventory: {
-                                ...inventory.userInventory,
-                                shoes: [
-                                  ...inventory.userInventory.shoes.filter(
-                                    (item) =>
-                                      item.id !== itemInInventory.id &&
-                                      item.id !== shoes.id
-                                  ),
-                                  itemInInventory,
-                                ],
-                              },
-                            });
-                          }
-                        } else {
-                          itemInInventory.qty--;
-                          equippedItemInInventory.qty++;
-
-                          if (
-                            equippedItemInInventory.id === itemInInventory.id
-                          ) {
-                            return;
-                          }
-                          setInventory({
-                            ...inventory,
-                            equippedItems: {
-                              ...inventory.equippedItems,
-                              shoes,
-                            },
-                            userInventory: {
-                              ...inventory.userInventory,
-                              shoes: [
-                                ...inventory.userInventory.shoes.filter(
-                                  (item) =>
-                                    item.id !== itemInInventory.id &&
-                                    item.id !== equippedItemInInventory.id
-                                ),
-                                itemInInventory,
-                                {...equippedItemInInventory},
-                              ],
-                            },
-                          });
-                        }
-                      }
+                      handleEquip('shoes', shoes)
 
                       toastr.success(response.data.message);
                     })
