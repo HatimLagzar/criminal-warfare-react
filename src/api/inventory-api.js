@@ -34,3 +34,20 @@ export const equipItem = (type, itemId) => {
     }
   );
 };
+
+export const consumeItem = (itemId, targetId = null) => {
+  const formData = new FormData();
+  if (targetId !== null) {
+    formData.set('targetId', targetId);
+  }
+
+  return axios.post(
+    'http://127.0.0.1:8000/api/inventory/' + itemId + '/use',
+    formData,
+    {
+      headers: {
+        Authorization: `Bearer ${authService.getToken()}`,
+      },
+    }
+  );
+};

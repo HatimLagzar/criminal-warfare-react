@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import ButtonForm from '../forms/ButtonForm/ButtonForm';
 import './InventoryItem.scss';
 
-export default function InventoryItem({ item, handleEquipItem }) {
+export default function InventoryItem({ item, handleUseItem, isUsable = false }) {
   return (
     <div className='inventory-item'>
       <div className='inventory-item-left'>
@@ -30,9 +30,9 @@ export default function InventoryItem({ item, handleEquipItem }) {
             [Market]
           </Link>
           <ButtonForm
-            text={'[Equip]'}
+            text={ isUsable ? '[Use]': '[Equip]'}
             classes={'btn-link'}
-            onSubmitHandler={handleEquipItem}
+            onSubmitHandler={handleUseItem}
           />
         </div>
       </div>

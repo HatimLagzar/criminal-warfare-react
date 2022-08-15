@@ -1,14 +1,18 @@
 import {useEffect, useState} from 'react';
 import toastr from 'toastr';
-import {equipItem, getAuthenticatedUserInventory, unequipItem,} from '../../api/inventory-api';
+import {consumeItem, equipItem, getAuthenticatedUserInventory, unequipItem,} from '../../api/inventory-api';
 import ContentArea from '../../components/ContentArea/ContentArea';
 import EquippedItem from '../../components/EquippedItem/EquippedItem';
 import InventoryItem from '../../components/InventoryItem/InventoryItem';
 import FlexRow from '../../components/layouts/FlexRow/FlexRow';
 import './InventoryPage.scss';
+import {useDispatch, useSelector} from "react-redux";
+import {setGeneralInfo} from "../../store/features/auth/authSlice";
 
 export default function InventoryPage() {
   const [inventory, setInventory] = useState(null);
+  const dispatch = useDispatch();
+  const generalInfo = useSelector(state => state.auth.generalInfo);
 
   useEffect(() => {
     if (inventory === null) {
@@ -352,7 +356,7 @@ export default function InventoryPage() {
               <InventoryItem
                 key={index + '-weapons'}
                 item={weapon}
-                handleEquipItem={() => {
+                handleUseItem={() => {
                   equipItem('weapon', weapon.itemid || weapon.id)
                     .then((response) => {
                       handleEquip('weapon', weapon)
@@ -379,7 +383,7 @@ export default function InventoryPage() {
               <InventoryItem
                 key={index + '-armors'}
                 item={armor}
-                handleEquipItem={() => {
+                handleUseItem={() => {
                   equipItem('armor', armor.itemid || armor.id)
                     .then((response) => {
                       handleEquip('armor', armor)
@@ -406,7 +410,7 @@ export default function InventoryPage() {
               <InventoryItem
                 key={index + '-shoes'}
                 item={shoes}
-                handleEquipItem={() => {
+                handleUseItem={() => {
                   equipItem('shoes', shoes.itemid || shoes.id)
                     .then((response) => {
                       handleEquip('shoes', shoes)
@@ -431,7 +435,55 @@ export default function InventoryPage() {
           {inventory.userInventory.consumables &&
           inventory.userInventory.consumables.length > 0
             ? inventory.userInventory.consumables.map((consumable, index) => (
-              <InventoryItem key={index + '-consumables'} item={consumable}/>
+              <InventoryItem
+                key={index + '-consumables'}
+                item={consumable}
+                handleUseItem={() => {
+                  consumeItem(consumable.itemid)
+                    .then(response => {
+                      const itemInInventory = inventory.userInventory.consumables.find(
+                        (item) => item.id === consumable.id
+                      );
+
+                      if (itemInInventory.qty <= 1) {
+                        setInventory({
+                          ...inventory,
+                          useInventory: {
+                            ...inventory.userInventory,
+                            consumables: [
+                              ...inventory.userInventory.consumables.filter(item => item.id !== consumable.id)
+                            ]
+                          }
+                        })
+                      } else {
+                        itemInInventory.qty--;
+
+                        setInventory({
+                          ...inventory,
+                          useInventory: {
+                            ...inventory.userInventory,
+                            consumables: [
+                              ...inventory.userInventory.consumables.filter(item => item.id !== consumable.id),
+                              {...itemInInventory}
+                            ]
+                          }
+                        })
+                      }
+
+                      dispatch(setGeneralInfo({...generalInfo, health: generalInfo.healthMax}))
+
+                      toastr.success(response.data.message)
+                    })
+                    .catch (error => {
+                      if (error.response) {
+                        toastr.error(error.response.data.message)
+                      }
+
+                      console.log(error)
+                    })
+                }}
+                isUsable
+              />
             ))
             : 'No consumables found!'}
         </FlexRow>
