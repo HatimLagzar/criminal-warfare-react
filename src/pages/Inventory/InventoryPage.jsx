@@ -9,6 +9,7 @@ import './InventoryPage.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {setGeneralInfo} from "../../store/features/auth/authSlice";
 import HouseBombItem from "../../components/HouseBombItem/HouseBombItem";
+import ScatterBombItem from "../../components/ScatterBombItem/ScatterBombItem";
 
 export default function InventoryPage() {
   const [inventory, setInventory] = useState(null);
@@ -489,14 +490,12 @@ export default function InventoryPage() {
                   key={index + '-consumables'}
                   item={consumable}
                   handleUseItem={handleUseItem}
-                  isUsable
                 />
               } else if (consumable.itemid === SCATTER_BOMB_ITEM_ID) {
-                return <InventoryItem
+                return <ScatterBombItem
                   key={index + '-consumables'}
                   item={consumable}
                   handleUseItem={handleUseItem}
-                  isUsable
                 />
               } else {
                 return <InventoryItem
