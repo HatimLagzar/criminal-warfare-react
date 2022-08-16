@@ -8,11 +8,14 @@ import FlexRow from '../../components/layouts/FlexRow/FlexRow';
 import './InventoryPage.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {setGeneralInfo} from "../../store/features/auth/authSlice";
+import HouseBombItem from "../../components/HouseBombItem/HouseBombItem";
 
 export default function InventoryPage() {
   const [inventory, setInventory] = useState(null);
   const dispatch = useDispatch();
   const generalInfo = useSelector(state => state.auth.generalInfo);
+  const HOUSE_BOMB_ITEM_ID = 33;
+  const SCATTER_BOMB_ITEM_ID = 34;
 
   useEffect(() => {
     if (inventory === null) {
@@ -105,6 +108,7 @@ export default function InventoryPage() {
    * Equip an item on the state
    *
    * @param type {string}
+   * @param selectedItem {Object}
    */
   function handleEquip(type, selectedItem) {
     let itemInInventory;
@@ -275,6 +279,51 @@ export default function InventoryPage() {
     }
   }
 
+  function handleUseItem(consumable, targetId = null) {
+    return consumeItem(consumable.itemid, targetId)
+      .then(response => {
+        const itemInInventory = inventory.userInventory.consumables.find(
+          (item) => item.id === consumable.id
+        );
+
+        if (itemInInventory.qty <= 1) {
+          setInventory({
+            ...inventory,
+            useInventory: {
+              ...inventory.userInventory,
+              consumables: [
+                ...inventory.userInventory.consumables.filter(item => item.id !== consumable.id)
+              ]
+            }
+          })
+        } else {
+          itemInInventory.qty--;
+
+          setInventory({
+            ...inventory,
+            useInventory: {
+              ...inventory.userInventory,
+              consumables: [
+                ...inventory.userInventory.consumables.filter(item => item.id !== consumable.id),
+                {...itemInInventory}
+              ]
+            }
+          })
+        }
+
+        dispatch(setGeneralInfo({...generalInfo, health: generalInfo.healthMax}))
+
+        toastr.success(response.data.message)
+      })
+      .catch(error => {
+        if (error.response) {
+          toastr.error(error.response.data.message)
+        }
+
+        console.log(error)
+      })
+  }
+
   return (
     <div className='inventory-page'>
       <ContentArea title='Equipped Items'>
@@ -434,57 +483,30 @@ export default function InventoryPage() {
         <FlexRow>
           {inventory.userInventory.consumables &&
           inventory.userInventory.consumables.length > 0
-            ? inventory.userInventory.consumables.map((consumable, index) => (
-              <InventoryItem
-                key={index + '-consumables'}
-                item={consumable}
-                handleUseItem={() => {
-                  consumeItem(consumable.itemid)
-                    .then(response => {
-                      const itemInInventory = inventory.userInventory.consumables.find(
-                        (item) => item.id === consumable.id
-                      );
-
-                      if (itemInInventory.qty <= 1) {
-                        setInventory({
-                          ...inventory,
-                          useInventory: {
-                            ...inventory.userInventory,
-                            consumables: [
-                              ...inventory.userInventory.consumables.filter(item => item.id !== consumable.id)
-                            ]
-                          }
-                        })
-                      } else {
-                        itemInInventory.qty--;
-
-                        setInventory({
-                          ...inventory,
-                          useInventory: {
-                            ...inventory.userInventory,
-                            consumables: [
-                              ...inventory.userInventory.consumables.filter(item => item.id !== consumable.id),
-                              {...itemInInventory}
-                            ]
-                          }
-                        })
-                      }
-
-                      dispatch(setGeneralInfo({...generalInfo, health: generalInfo.healthMax}))
-
-                      toastr.success(response.data.message)
-                    })
-                    .catch (error => {
-                      if (error.response) {
-                        toastr.error(error.response.data.message)
-                      }
-
-                      console.log(error)
-                    })
-                }}
-                isUsable
-              />
-            ))
+            ? inventory.userInventory.consumables.map((consumable, index) => {
+              if (consumable.itemid === HOUSE_BOMB_ITEM_ID) {
+                return <HouseBombItem
+                  key={index + '-consumables'}
+                  item={consumable}
+                  handleUseItem={handleUseItem}
+                  isUsable
+                />
+              } else if (consumable.itemid === SCATTER_BOMB_ITEM_ID) {
+                return <InventoryItem
+                  key={index + '-consumables'}
+                  item={consumable}
+                  handleUseItem={handleUseItem}
+                  isUsable
+                />
+              } else {
+                return <InventoryItem
+                  key={index + '-consumables'}
+                  item={consumable}
+                  handleUseItem={handleUseItem}
+                  isUsable
+                />
+              }
+            })
             : 'No consumables found!'}
         </FlexRow>
       </ContentArea>
