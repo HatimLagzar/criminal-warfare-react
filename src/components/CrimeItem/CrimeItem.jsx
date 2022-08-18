@@ -4,10 +4,14 @@ import ButtonForm from "../forms/ButtonForm/ButtonForm";
 import {doCrime, doCrimeFast} from "../../api/crime-api";
 import './CrimeItem.scss'
 import {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {setGeneralInfo} from "../../store/features/auth/authSlice";
 
 export default function CrimeItem({crime}) {
   const [isLoading, setIsLoading] = useState(false);
   const [isCrimeFastLoading, setIsCrimeFastLoading] = useState(false);
+  const generalInfo = useSelector(state => state.auth.generalInfo);
+  const dispatch = useDispatch();
 
   return <div className={'crime-item'}>
     <div className="crime-header">
@@ -26,6 +30,13 @@ export default function CrimeItem({crime}) {
           doCrime(crime.id)
             .then(response => {
               setIsLoading(false);
+              dispatch(setGeneralInfo({
+                ...generalInfo,
+                nerve: generalInfo.nerve - crime.nerve,
+                exp: generalInfo.exp + crime.exp,
+                money: generalInfo.money + crime.money
+              }));
+
               toastr.success(response.data.message);
             })
             .catch(error => {
@@ -46,14 +57,20 @@ export default function CrimeItem({crime}) {
             .then(response => {
               setIsCrimeFastLoading(false);
               toastr.success(response.data.message);
+              dispatch(setGeneralInfo({
+                ...generalInfo,
+                nerve: generalInfo.nerve - crime.nerve,
+                exp: generalInfo.exp + crime.exp,
+                money: generalInfo.money + crime.money
+              }));
             })
             .catch(error => {
               setIsCrimeFastLoading(false);
 
               if (error.response) {
                 toastr.error(error.response.data.message);
-
               }
+
               console.log(error)
             })
         }} />
