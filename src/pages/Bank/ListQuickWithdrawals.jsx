@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import toastr from 'toastr';
-import { withdrawMoney } from '../../api/bank-api';
+import {withdrawMoney} from '../../api/bank-api';
 import ButtonForm from '../../components/forms/ButtonForm/ButtonForm';
-import { formatMoney } from '../../utils/helpers/formatters';
+import {formatMoney} from '../../utils/helpers/formatters';
 import './ListQuickWithdrawals.scss';
+import {useDispatch, useSelector} from "react-redux";
+import {setGeneralInfo} from "../../store/features/auth/authSlice";
 
 export default function ListQuickWithdrawals({ options }) {
   const [isLoading, setIsLoading] = useState(false);
+  const generalInfo = useSelector(state => state.auth.generalInfo);
+  const dispatch = useDispatch();
 
   function handleSubmitQuickWithdraw(amount) {
     setIsLoading(true);
@@ -15,6 +19,11 @@ export default function ListQuickWithdrawals({ options }) {
       .then((response) => {
         toastr.success(response.data.message);
         setIsLoading(false);
+        dispatch(setGeneralInfo({
+          ...generalInfo,
+          money: parseInt(generalInfo.money) + parseInt(amount),
+          bank: parseInt(generalInfo.bank) - parseInt(amount)
+        }));
       })
       .catch((error) => {
         if (error.response) {
