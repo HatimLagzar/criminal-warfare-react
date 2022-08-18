@@ -19,6 +19,8 @@ export default function InventoryPage() {
   const SCATTER_BOMB_ITEM_ID = 34;
 
   useEffect(() => {
+    document.title = 'Inventory | Criminal Warfare';
+
     if (inventory === null) {
       getAuthenticatedUserInventory()
         .then((response) => {
@@ -501,7 +503,7 @@ export default function InventoryPage() {
                 return <InventoryItem
                   key={index + '-consumables'}
                   item={consumable}
-                  handleUseItem={handleUseItem}
+                  handleUseItem={() => handleUseItem(consumable)}
                   isUsable
                 />
               }

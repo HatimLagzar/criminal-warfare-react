@@ -1,0 +1,42 @@
+.crime-item {
+  background: rgba(0,0,0,.2);
+  width: 49%;
+  height: 60px;
+  margin: 3px;
+  border: 1px solid #161616;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .crime-name {
+    font-weight: bold;
+  }
+
+  .crime-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .crime-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .money {
+      border-right: 1px solid #161616;
+      color: limegreen;
+      font-size: 15px;
+      min-width: 65px;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .exp {
+      color: gold;
+      font-size: 15px;
+      min-width: 75px;
+      text-align: center;
+      display: inline-block;
+    }
+  }
+}
