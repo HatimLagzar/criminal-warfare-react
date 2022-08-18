@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import toastr from 'toastr';
-import { depositMoney } from '../../api/bank-api';
+import {depositMoney} from '../../api/bank-api';
 import Button from '../../components/buttons/Button/Button';
 import Input from '../../components/forms/Input/Input';
 import './DepositForm.scss';
+import {useDispatch, useSelector} from "react-redux";
+import {setGeneralInfo} from "../../store/features/auth/authSlice";
 
 export default function DepositForm() {
   const [amount, setAmount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const generalInfo = useSelector(state => state.auth.generalInfo);
+  const dispatch = useDispatch();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -17,6 +21,13 @@ export default function DepositForm() {
       .then((response) => {
         setIsLoading(false);
         toastr.success(response.data.message);
+        dispatch(setGeneralInfo({
+          ...generalInfo,
+          money: parseInt(generalInfo.money) - parseInt(amount),
+          bank: parseInt(generalInfo.bank) + parseInt(amount)
+        }));
+
+        setAmount(0);
       })
       .catch((error) => {
         setIsLoading(false);

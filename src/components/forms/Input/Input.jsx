@@ -12,7 +12,7 @@ export default function Input({
       type={type}
       id={id}
       onChange={handleInputChange}
-      defaultValue={value}
+      value={value}
     />
   );
 }
