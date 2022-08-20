@@ -4,4 +4,16 @@
     flex-direction: row;
     flex-wrap: wrap;
   }
+
+  #crime-result {
+    width: 97%;
+    margin: 10px auto;
+    height: 35px;
+    background: rgba(0,0,0,.2);
+    border-radius: 5px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 35px;
+    font-weight: bold;
+  }
 }

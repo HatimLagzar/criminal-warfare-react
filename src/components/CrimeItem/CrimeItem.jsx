@@ -7,7 +7,7 @@ import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setGeneralInfo} from "../../store/features/auth/authSlice";
 
-export default function CrimeItem({crime}) {
+export default function CrimeItem({crime, setMessage}) {
   const [isLoading, setIsLoading] = useState(false);
   const [isCrimeFastLoading, setIsCrimeFastLoading] = useState(false);
   const generalInfo = useSelector(state => state.auth.generalInfo);
@@ -37,7 +37,7 @@ export default function CrimeItem({crime}) {
                 money: generalInfo.money + crime.money
               }));
 
-              toastr.success(response.data.message);
+              setMessage(response.data.message)
             })
             .catch(error => {
               setIsLoading(false);
@@ -56,13 +56,14 @@ export default function CrimeItem({crime}) {
           doCrimeFast(crime.id)
             .then(response => {
               setIsCrimeFastLoading(false);
-              toastr.success(response.data.message);
               dispatch(setGeneralInfo({
                 ...generalInfo,
                 nerve: generalInfo.nerve - crime.nerve,
                 exp: generalInfo.exp + crime.exp,
                 money: generalInfo.money + crime.money
               }));
+
+              setMessage(response.data.message)
             })
             .catch(error => {
               setIsCrimeFastLoading(false);

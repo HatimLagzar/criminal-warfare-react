@@ -6,6 +6,7 @@ import CrimeItem from "../../components/CrimeItem/CrimeItem";
 import './CrimePage.scss'
 
 export default function CrimePage() {
+  const [message, setMessage] = useState('');
   const [crimes, setCrimes] = useState(null);
 
   useEffect(() => {
@@ -32,10 +33,11 @@ export default function CrimePage() {
 
   return <div id={'crime-page'}>
     <ContentArea title={'Crimes'}>
+      <div id="crime-result" dangerouslySetInnerHTML={{__html: message}}></div>
       <div className="crimes-list">
         {
           crimes instanceof Array && crimes.length > 0
-            ? crimes.map(crime => <CrimeItem crime={crime} />)
+            ? crimes.map(crime => <CrimeItem setMessage={setMessage} crime={crime} />)
             : ''
         }
       </div>
