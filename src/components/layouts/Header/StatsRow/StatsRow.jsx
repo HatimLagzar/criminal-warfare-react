@@ -21,14 +21,14 @@ const StatsRow = () => {
     <FlexWrap className={'wrapper'}>
       <StatsContainer className={'user-info'}>
         <div className={'user-info-left'}>
-          <Avatar generalInfo={generalInfo} />
+          <Avatar generalInfo={generalInfo}/>
         </div>
         <div className={'user-info-right'}>
-          <Username generalInfo={generalInfo} />
-          <UserInfo generalInfo={generalInfo} />
+          <Username generalInfo={generalInfo}/>
+          <UserInfo generalInfo={generalInfo}/>
         </div>
       </StatsContainer>
-      <GameClock />
+      <GameClock/>
       <StatsContainer className={'user-attributes'}>
         <PlayerAttribute
           label={'Health'}
