@@ -24,6 +24,7 @@ export default function CrimePage() {
       getAllCrimes()
         .then(response => {
           setCrimes(response.data.crimes);
+          setKeysLeft(response.data.keysLeft);
         })
         .catch(error => {
           if (error.response) {
