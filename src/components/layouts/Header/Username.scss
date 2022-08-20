@@ -1,0 +1,9 @@
+.user-info-name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .in-prison-status {
+    margin-right: 5px;
+  }
+}

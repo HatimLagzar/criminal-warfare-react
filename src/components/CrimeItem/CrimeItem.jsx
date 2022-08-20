@@ -5,7 +5,7 @@ import {doCrime, doCrimeFast} from "../../api/crime-api";
 import './CrimeItem.scss'
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setGeneralInfo} from "../../store/features/auth/authSlice";
+import {setGeneralInfo, setIsInPrison} from "../../store/features/auth/authSlice";
 
 export default function CrimeItem({crime, setMessage}) {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,6 +37,8 @@ export default function CrimeItem({crime, setMessage}) {
                 money: generalInfo.money + crime.money
               }));
 
+              dispatch(setIsInPrison(response.data.prison || false))
+
               setMessage(response.data.message)
             })
             .catch(error => {
@@ -62,6 +64,8 @@ export default function CrimeItem({crime, setMessage}) {
                 exp: generalInfo.exp + crime.exp,
                 money: generalInfo.money + crime.money
               }));
+
+              dispatch(setIsInPrison(response.data.prison || false))
 
               setMessage(response.data.message)
             })

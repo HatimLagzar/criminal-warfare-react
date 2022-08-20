@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 import authService from '../services/auth/AuthService';
 import userService from '../services/auth/UserService';
-import { setGeneralInfo } from '../store/features/auth/authSlice';
+import {setGeneralInfo, setIsInPrison} from '../store/features/auth/authSlice';
 import {
   setAttributes,
-  setEquippedAttributes,
-  setCriminalCareer,
   setBattleStats,
+  setCriminalCareer,
+  setEquippedAttributes,
 } from '../store/features/pages/homeSlice';
-import { HTTP_OK } from '../utils/constants/response-codes';
+import {HTTP_OK} from '../utils/constants/response-codes';
 import Footer from './layouts/Footer/Footer';
 import Header from './layouts/Header/Header';
 import Middle from './Middle/Middle';
@@ -38,6 +38,7 @@ export default function App() {
           dispatch(
             setEquippedAttributes(response.data.data.equippedAttributes)
           );
+          dispatch(setIsInPrison(response.data.data.isInPrison))
         }
       });
     } else {

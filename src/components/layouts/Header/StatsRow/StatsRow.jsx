@@ -5,9 +5,9 @@ import StatsContainer from './../StatsContainer/StatsContainer';
 import './StatsRow.scss';
 import UserInfo from './../UserInfo';
 import Username from './../Username';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import PlayerAttribute from '../../../PlayerAttribute/PlayerAttribute';
-import { setGeneralInfo } from '../../../../store/features/auth/authSlice';
+import {setGeneralInfo} from '../../../../store/features/auth/authSlice';
 
 const StatsRow = () => {
   const dispatch = useDispatch();

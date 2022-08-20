@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -6,6 +6,7 @@ export const authSlice = createSlice({
     token: null,
     user: null,
     generalInfo: null,
+    isInPrison: false,
   },
   reducers: {
     setToken(state, action) {
@@ -19,8 +20,12 @@ export const authSlice = createSlice({
     setGeneralInfo(state, action) {
       state.generalInfo = action.payload;
     },
+
+    setIsInPrison(state, action) {
+      state.isInPrison = action.payload;
+    }
   },
 });
 
-export const { setUser, setToken, setGeneralInfo } = authSlice.actions;
+export const { setUser, setToken, setGeneralInfo, setIsInPrison } = authSlice.actions;
 export default authSlice.reducer;
