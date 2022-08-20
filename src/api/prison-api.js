@@ -8,3 +8,11 @@ export const bailFromPrison = () => {
     },
   });
 };
+
+export const escapePrisonUsingKey = () => {
+  return axios.post('http://127.0.0.1:8000/api/prison/use-key', {}, {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  });
+};
