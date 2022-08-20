@@ -6,16 +6,19 @@ import CrimeItem from "../../components/CrimeItem/CrimeItem";
 import './CrimePage.scss'
 import ButtonForm from "../../components/forms/ButtonForm/ButtonForm";
 import {bailFromPrison, escapePrisonUsingKey} from "../../api/prison-api";
-import {setIsInPrison} from "../../store/features/auth/authSlice";
-import {useDispatch} from "react-redux";
+import {setGeneralInfo, setIsInPrison} from "../../store/features/auth/authSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {refill} from "../../api/refill-api";
 
 export default function CrimePage() {
   const [bailIsLoading, setBailIsLoading] = useState(false);
   const [usingPrisonKey, setUsingPrisonKey] = useState(false);
+  const [refillingNerve, setRefillingNerve] = useState(false);
   const [message, setMessage] = useState('');
   const [crimes, setCrimes] = useState(null);
   const [keysLeft, setKeysLeft] = useState(0);
   const dispatch = useDispatch();
+  const generalInfo = useSelector(state => state.auth.generalInfo);
 
   useEffect(() => {
     document.title = 'Crimes | Criminal Warfare';
@@ -43,7 +46,31 @@ export default function CrimePage() {
   return <div id={'crime-page'}>
     <ContentArea title={'Crimes'}>
       <div className={'crime-page-actions'}>
-        <ButtonForm text={'Refill Nerve'}/>
+        <ButtonForm
+          isLoading={refillingNerve}
+          showLoadingIcon={refillingNerve}
+          text={'Refill Nerve'}
+          onSubmitHandler={() => {
+            setRefillingNerve(true)
+            refill('nerve')
+              .then(response => {
+                setMessage(response.data.message)
+                setRefillingNerve(false)
+                dispatch(setGeneralInfo({
+                  ...generalInfo,
+                  nerve: generalInfo.nerveMax
+                }))
+              })
+              .catch(error => {
+                if (error.response) {
+                  setMessage(error.response.data.message)
+                }
+
+                setRefillingNerve(false)
+                console.log(error)
+              })
+          }}/>
+
         <div>
           <ButtonForm isLoading={bailIsLoading} showLoadingIcon={bailIsLoading} text={'Bail'} onSubmitHandler={() => {
             setBailIsLoading(true)
