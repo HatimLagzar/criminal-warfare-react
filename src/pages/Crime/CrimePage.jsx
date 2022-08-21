@@ -9,6 +9,7 @@ import {bailFromPrison, escapePrisonUsingKey} from "../../api/prison-api";
 import {setGeneralInfo, setIsInPrison} from "../../store/features/auth/authSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {refill} from "../../api/refill-api";
+import Button from "../../components/buttons/Button/Button";
 
 export default function CrimePage() {
   const [bailIsLoading, setBailIsLoading] = useState(false);
@@ -73,7 +74,7 @@ export default function CrimePage() {
                   })
               }}
             />
-            : ''
+            : <Button text={'Nerve is Full'} classes={'btn btn-gray'} isLoading />
         }
 
         <div>

@@ -10,13 +10,17 @@
   border: 1px solid #000;
   color: #fff;
 
+  &.btn-gray {
+    background-color: gray;
+  }
+
   &.btn-red {
     background-color: #802627;
+  }
 
-    &:disabled {
-      text-shadow: none;
-      cursor: default;
-    }
+  &:disabled {
+    text-shadow: none;
+    cursor: default;
   }
 
   &.btn-link {
