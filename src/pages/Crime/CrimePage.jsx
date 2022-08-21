@@ -46,30 +46,35 @@ export default function CrimePage() {
   return <div id={'crime-page'}>
     <ContentArea title={'Crimes'}>
       <div className={'crime-page-actions'}>
-        <ButtonForm
-          isLoading={refillingNerve}
-          showLoadingIcon={refillingNerve}
-          text={'Refill Nerve'}
-          onSubmitHandler={() => {
-            setRefillingNerve(true)
-            refill('nerve')
-              .then(response => {
-                setMessage(response.data.message)
-                setRefillingNerve(false)
-                dispatch(setGeneralInfo({
-                  ...generalInfo,
-                  nerve: generalInfo.nerveMax
-                }))
-              })
-              .catch(error => {
-                if (error.response) {
-                  setMessage(error.response.data.message)
-                }
+        {
+          generalInfo.nerveMax !== generalInfo.nerve
+            ? <ButtonForm
+              isLoading={refillingNerve}
+              showLoadingIcon={refillingNerve}
+              text={`Refill ${generalInfo.nerveMax - generalInfo.nerve} Nerve [10 points]`}
+              onSubmitHandler={() => {
+                setRefillingNerve(true)
+                refill('nerve')
+                  .then(response => {
+                    setMessage(response.data.message)
+                    setRefillingNerve(false)
+                    dispatch(setGeneralInfo({
+                      ...generalInfo,
+                      nerve: generalInfo.nerveMax
+                    }))
+                  })
+                  .catch(error => {
+                    if (error.response) {
+                      setMessage(error.response.data.message)
+                    }
 
-                setRefillingNerve(false)
-                console.log(error)
-              })
-          }}/>
+                    setRefillingNerve(false)
+                    console.log(error)
+                  })
+              }}
+            />
+            : ''
+        }
 
         <div>
           <ButtonForm isLoading={bailIsLoading} showLoadingIcon={bailIsLoading} text={'Bail'} onSubmitHandler={() => {
