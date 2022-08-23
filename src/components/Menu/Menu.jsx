@@ -15,12 +15,14 @@ const Menu = () => {
 
   if (isLoggedIn) {
     menu = [
-      { group: 'Useful' },
+      { group: 'MAIN STREET' },
       { link: '/', title: 'Home' },
       { link: '/travel', title: 'Travel' },
       { link: '/bank', title: 'Bank' },
       { link: '/inventory', title: 'Inventory' },
       { link: '/crime', title: 'Crime' },
+      { link: '/gym', title: 'Gym' },
+      { link: '/missions', title: 'Missions' },
       { link: '/criminal_pass', title: 'Criminal Pass' },
       { link: '/jobs', title: 'Job Clockin', highlight: true },
       { link: '/usersonline', title: 'Users Online' },
@@ -35,8 +37,6 @@ const Menu = () => {
       { group: 'Not So Useful' },
       { link: '/gang_home', title: 'Your Gang' },
       { link: '/gang_mail', title: 'Gang Mail', badge: 0 },
-      { link: '/gym', title: 'Gym' },
-      { link: '/missions', title: 'Missions' },
       { link: '/operations', title: 'Operations' },
       { link: '/achievements', title: 'Achievements' },
       { link: '/weekly_arena', title: 'Weekly Arena' },

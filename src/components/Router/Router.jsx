@@ -7,6 +7,7 @@ import BankPage from '../../pages/Bank/BankPage';
 import InventoryPage from '../../pages/Inventory/InventoryPage';
 import CrimePage from "../../pages/Crime/CrimePage";
 import GymPage from "../../pages/Gym/GymPage";
+import MissionsPage from "../../pages/Missions/MissionsPage";
 
 export default function Router() {
   return (
@@ -18,6 +19,7 @@ export default function Router() {
       <Route path='crime' exact element={<CrimePage />} />
       <Route path='inventory' exact element={<InventoryPage />} />
       <Route path='gym' exact element={<GymPage />} />
+      <Route path='missions' exact element={<MissionsPage />} />
     </Routes>
   );
 }
