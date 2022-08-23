@@ -10,6 +10,7 @@ import {setGeneralInfo, setIsInPrison} from "../../store/features/auth/authSlice
 import {useDispatch, useSelector} from "react-redux";
 import {refill} from "../../api/refill-api";
 import Button from "../../components/buttons/Button/Button";
+import MessageArea from "../../components/MessageArea/MessageArea";
 
 export default function CrimePage() {
   const [bailIsLoading, setBailIsLoading] = useState(false);
@@ -122,7 +123,7 @@ export default function CrimePage() {
             }}/>
         </div>
       </div>
-      <div id="crime-result" dangerouslySetInnerHTML={{__html: message}}></div>
+      <MessageArea message={message} />
       <div className="crimes-list">
         {
           crimes instanceof Array && crimes.length > 0
