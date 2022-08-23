@@ -1,0 +1,51 @@
+#gym-page {
+  table {
+    text-align: center;
+    background-color: rgba(50,50,50,.3);
+    border: 1px solid black;
+
+    span {
+      margin-bottom: 5px;
+      display: inline-block;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    thead td {
+      font-weight: bold;
+      padding: 7px;
+      vertical-align: middle;
+    }
+
+    tr {
+      border-bottom: 1px solid black;
+
+      td {
+        padding: 7px;
+        vertical-align: middle;
+      }
+    }
+
+    tbody {
+      tr {
+        &:nth-of-type(even) {
+          background-color: rgba(0,0,0,.1);
+        }
+      }
+    }
+
+    input {
+      width: 75%;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      border-right: none;
+    }
+
+    input ~ form button {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
+}
