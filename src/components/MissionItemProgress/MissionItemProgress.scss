@@ -1,6 +1,5 @@
-.mission-item {
-  width: 32%;
-  margin-bottom: 15px;
+.mission-item-progress {
+  width: 100%;
   box-sizing: border-box;
 
   header {
@@ -20,9 +19,7 @@
     border: 1px solid #161616;
   }
 
-  .mission-item-body {
-    padding: 10px;
-
+  .mission-item-progress-body {
     ul {
       padding: 0;
       margin: 0;
