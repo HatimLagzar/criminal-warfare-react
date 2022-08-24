@@ -6,7 +6,7 @@ import {useState} from "react";
 import {formatTimeToETA} from "../../utils/helpers/formatters";
 import {time} from "../../utils/helpers/dates";
 
-export default function MissionItem({mission, generalInfo, isDoingMission}) {
+export default function MissionItem({mission, generalInfo, isDoingMission, loadMissions}) {
   const [isStarting, setIsStarting] = useState(false);
 
   if (!mission.enabled) {
@@ -82,6 +82,7 @@ export default function MissionItem({mission, generalInfo, isDoingMission}) {
                         .then(response => {
                           setIsStarting(false)
                           toastr.success(response.data.message);
+                          loadMissions()
                         })
                         .catch(error => {
                           setIsStarting(false)

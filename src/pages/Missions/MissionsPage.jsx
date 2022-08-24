@@ -17,22 +17,26 @@ export default function MissionsPage() {
 
   useEffect(() => {
     if (missions === null) {
-      getAllMissions()
-        .then(response => {
-          setMissions(response.data.missions)
-          setMissionsLogs(response.data.missionsLogs)
-          setIsDoingMission(response.data.isAttemptingMission)
-          setMissionProgress(response.data.missionProgress)
-        })
-        .catch(error => {
-          if (error.response) {
-            toastr.error(error.response.data.message)
-          }
-
-          console.log(error)
-        })
+      loadMissions()
     }
   })
+
+  function loadMissions() {
+    getAllMissions()
+      .then(response => {
+        setMissions(response.data.missions)
+        setMissionsLogs(response.data.missionsLogs)
+        setIsDoingMission(response.data.isAttemptingMission)
+        setMissionProgress(response.data.missionProgress)
+      })
+      .catch(error => {
+        if (error.response) {
+          toastr.error(error.response.data.message)
+        }
+
+        console.log(error)
+      })
+  }
 
   if (missions === null || generalInfo === null) {
     return 'Loading...';
@@ -51,6 +55,7 @@ export default function MissionsPage() {
                   mission={mission}
                   key={mission.id + '-mission'}
                   isDoingMission={isDoingMission}
+                  loadMissions={loadMissions}
                 />)
                 : ''
             }
