@@ -1,0 +1,44 @@
+#operations-page {
+  #auto-starter {
+    background-color: rgba(220, 0, 0, .1) !important;
+    width: 100%;
+    padding: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: -5px -3px;
+  }
+
+  .operations-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    .operation-item {
+      width: 49%;
+      margin-bottom: 15px;
+
+      table {
+        border: 1px solid black;
+        border-collapse: collapse;
+
+        tr {
+          border-bottom: 1px solid black;
+
+          button {
+            font-size: 12px;
+            display: block;
+            margin: 0 auto;
+          }
+        }
+
+        tbody tr &:last-child {
+          padding: 7px;
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
