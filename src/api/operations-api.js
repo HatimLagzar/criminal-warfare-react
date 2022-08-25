@@ -8,8 +8,17 @@ export const getAllOperations = () => {
     },
   });
 };
+
 export const toggleOperationsAutoStarter = () => {
   return axios.post('http://127.0.0.1:8000/api/operations/autostart', {}, {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  });
+};
+
+export const startOperation = (operationId) => {
+  return axios.post('http://127.0.0.1:8000/api/operations/' + operationId + '/start', {}, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },

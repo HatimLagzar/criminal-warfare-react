@@ -1,0 +1,13 @@
+.operation-in-progress {
+  margin-top: 20px;
+
+  table {
+    border: 1px solid black;
+    border-collapse: collapse;
+
+    tr {
+      border-bottom: 1px solid black !important;
+      padding: 7px;
+    }
+  }
+}

@@ -27,10 +27,14 @@
         tr {
           border-bottom: 1px solid black;
 
-          button {
-            font-size: 12px;
+          form {
             display: block;
-            margin: 0 auto;
+
+            button {
+              font-size: 12px;
+              margin: 0 auto;
+              display: block;
+            }
           }
         }
 
