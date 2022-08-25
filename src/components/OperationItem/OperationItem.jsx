@@ -3,7 +3,7 @@ import ButtonForm from "../forms/ButtonForm/ButtonForm";
 import {startOperation} from "../../api/operations-api";
 import {useState} from "react";
 
-export default function OperationItem({operation}) {
+export default function OperationItem({operation, loadOperations}) {
   const [isStartingOperation, setIsStartOperation] = useState(false);
 
   return <div className={'operation-item'}>
@@ -31,6 +31,7 @@ export default function OperationItem({operation}) {
                           .then(response => {
                             setIsStartOperation(false);
                             toastr.success(response.data.message);
+                            loadOperations()
                           })
                           .catch(error => {
                             setIsStartOperation(false);

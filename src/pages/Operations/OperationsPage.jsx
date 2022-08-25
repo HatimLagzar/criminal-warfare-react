@@ -15,7 +15,7 @@ export default function OperationsPage() {
   const [isAutoStarterEnabled, setIsAutoStarterEnabled] = useState(false);
   const [isLoadingAutoStart, setIsLoadingAutoStart] = useState(false);
 
-  useEffect(() => {
+  function loadOperations() {
     getAllOperations()
       .then(response => {
         setOperationsData(response.data.operations);
@@ -30,6 +30,10 @@ export default function OperationsPage() {
 
         console.log(error)
       })
+  }
+
+  useEffect(() => {
+    loadOperations()
   }, []);
 
   if (operationsData === null) {
@@ -66,7 +70,7 @@ export default function OperationsPage() {
         operationInProgress === null
           ? <div className="operations-list">
             {
-              operationsData.map((operation, index) => <OperationItem key={index + '-operation'} operation={operation}/>)
+              operationsData.map((operation, index) => <OperationItem key={index + '-operation'} operation={operation} loadOperations={loadOperations}/>)
             }
           </div>
           : <OperationInProgress userOperation={operationInProgress} />
