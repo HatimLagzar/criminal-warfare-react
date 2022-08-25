@@ -1,7 +1,12 @@
-import Button from "../buttons/Button/Button";
+import toastr from "toastr";
 import './PremiumOperationItem.scss'
+import ButtonForm from "../forms/ButtonForm/ButtonForm";
+import {buyPremiumOperation} from "../../api/operations-api";
+import {useState} from "react";
 
-export default function PremiumOperationItem({title, cost}) {
+export default function PremiumOperationItem({title, cost, opSet}) {
+  const [isBuying, setIsBuying] = useState(false);
+
   return <div className={'premium-operation-item'}>
     <table className={'table'}>
       <tbody>
@@ -11,7 +16,27 @@ export default function PremiumOperationItem({title, cost}) {
       <tr>
         <td>Cost: {cost}</td>
         <td>
-          <Button text={'Buy'} />
+          <ButtonForm text={'Buy'}
+                      isLoading={isBuying}
+                      showLoadingIcon={isBuying}
+                      onSubmitHandler={() => {
+                        setIsBuying(true);
+
+                        buyPremiumOperation(opSet)
+                          .then(response => {
+                            toastr.success(response.data.message);
+                            setIsBuying(false);
+                          })
+                          .catch(error => {
+                            setIsBuying(false);
+
+                            if (error.response) {
+                              toastr.error(error.response.data.message);
+                            }
+
+                            console.log(error)
+                          })
+                      }}/>
         </td>
       </tr>
       </tbody>

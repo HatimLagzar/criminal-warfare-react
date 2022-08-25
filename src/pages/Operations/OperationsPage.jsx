@@ -89,6 +89,7 @@ export default function OperationsPage() {
                 key={index + '-premium-operation'}
                 title={operation.title}
                 cost={operation.cost}
+                opSet={operation.opSet}
               />
             })
             : 'No premium operations to buy.'

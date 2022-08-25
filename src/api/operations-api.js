@@ -24,3 +24,14 @@ export const startOperation = (operationId) => {
     },
   });
 };
+
+export const buyPremiumOperation = (opSet) => {
+  const formData = new FormData();
+  formData.set('opSet', opSet);
+
+  return axios.post('http://127.0.0.1:8000/api/operations/premium/buy', formData, {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  });
+};
