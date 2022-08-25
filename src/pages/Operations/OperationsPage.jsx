@@ -90,6 +90,7 @@ export default function OperationsPage() {
                 title={operation.title}
                 cost={operation.cost}
                 opSet={operation.opSet}
+                loadOperations={loadOperations}
               />
             })
             : 'No premium operations to buy.'

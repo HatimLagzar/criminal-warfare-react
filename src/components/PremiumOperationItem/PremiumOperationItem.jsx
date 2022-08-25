@@ -4,7 +4,7 @@ import ButtonForm from "../forms/ButtonForm/ButtonForm";
 import {buyPremiumOperation} from "../../api/operations-api";
 import {useState} from "react";
 
-export default function PremiumOperationItem({title, cost, opSet}) {
+export default function PremiumOperationItem({title, cost, opSet, loadOperations}) {
   const [isBuying, setIsBuying] = useState(false);
 
   return <div className={'premium-operation-item'}>
@@ -26,6 +26,7 @@ export default function PremiumOperationItem({title, cost, opSet}) {
                           .then(response => {
                             toastr.success(response.data.message);
                             setIsBuying(false);
+                            loadOperations()
                           })
                           .catch(error => {
                             setIsBuying(false);
