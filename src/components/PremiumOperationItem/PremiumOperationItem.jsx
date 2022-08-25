@@ -1,14 +1,13 @@
 import Button from "../buttons/Button/Button";
+import './PremiumOperationItem.scss'
 
 export default function PremiumOperationItem({title, cost}) {
-  return <div className={'operation-item'}>
+  return <div className={'premium-operation-item'}>
     <table className={'table'}>
-      <thead>
+      <tbody>
       <tr>
         <th colSpan={2} style={{textAlign: 'center'}}>{title}</th>
       </tr>
-      </thead>
-      <tbody>
       <tr>
         <td>Cost: {cost}</td>
         <td>

@@ -9,6 +9,7 @@
     margin: -5px -3px;
   }
 
+  .premium-operations-list,
   .operations-list {
     display: flex;
     flex-direction: row;
@@ -16,6 +17,9 @@
     justify-content: space-between;
     margin-top: 20px;
 
+  }
+
+  .operations-list {
     .operation-item {
       width: 49%;
       margin-bottom: 15px;

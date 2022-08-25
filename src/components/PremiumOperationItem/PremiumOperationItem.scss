@@ -1,0 +1,16 @@
+.premium-operation-item {
+  width: 49%;
+
+  table {
+    border: 1px solid black;
+    border-collapse: collapse;
+
+    tr {
+      border-bottom: 1px solid black !important;
+
+      &:nth-of-type(odd) {
+        background-color: rgba(0,0,0,.1);
+      }
+    }
+  }
+}
