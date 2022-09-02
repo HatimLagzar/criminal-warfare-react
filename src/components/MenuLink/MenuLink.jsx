@@ -6,9 +6,14 @@ const MenuLink = (props) => {
   if (Number.isInteger(props.badge)) {
     badge = <MenuBadge badge={props.badge} link={props.link} />;
   }
+
   return (
     <Link to={props.link}>
-      {props.children}
+      {props.highlighted ? (
+        <span className='red-text'>{props.children}</span>
+      ) : (
+        props.children
+      )}
       {badge}
     </Link>
   );

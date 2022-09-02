@@ -1,14 +1,15 @@
 import React from 'react';
-import {Route, Routes} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import HomePage from '../../pages/Home/HomePage';
 import LoginPage from '../../pages/Login/LoginPage';
 import TravelPage from '../../pages/Travel/TravelPage';
 import BankPage from '../../pages/Bank/BankPage';
 import InventoryPage from '../../pages/Inventory/InventoryPage';
-import CrimePage from "../../pages/Crime/CrimePage";
-import GymPage from "../../pages/Gym/GymPage";
-import MissionsPage from "../../pages/Missions/MissionsPage";
-import OperationsPage from "../../pages/Operations/OperationsPage";
+import CrimePage from '../../pages/Crime/CrimePage';
+import GymPage from '../../pages/Gym/GymPage';
+import MissionsPage from '../../pages/Missions/MissionsPage';
+import OperationsPage from '../../pages/Operations/OperationsPage';
+import JobsPage from '../../pages/Jobs/JobsPage';
 
 export default function Router() {
   return (
@@ -22,6 +23,7 @@ export default function Router() {
       <Route path='gym' exact element={<GymPage />} />
       <Route path='missions' exact element={<MissionsPage />} />
       <Route path='operations' exact element={<OperationsPage />} />
+      <Route path='jobs' exact element={<JobsPage />} />
     </Routes>
   );
 }

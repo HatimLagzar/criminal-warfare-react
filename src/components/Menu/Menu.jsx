@@ -2,9 +2,29 @@ import './Menu.scss';
 import MenuGroup from './../MenuGroup/MenuGroup';
 import MenuLink from './../MenuLink/MenuLink';
 import useAuthenticationStatus from '../../hooks/auth/useAuthenticationStatus';
+import { checkIsInJob } from '../../api/jobs-api';
+import toastr from 'toastr';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsInJob } from '../../store/features/pages/jobSlice';
 
 const Menu = () => {
   const isLoggedIn = useAuthenticationStatus();
+  const dispatch = useDispatch();
+  const isInJob = useSelector((state) => state.jobs.isInJob);
+
+  if (isLoggedIn) {
+    checkIsInJob()
+      .then((response) => {
+        dispatch(setIsInJob(response.data.isInJob));
+      })
+      .catch((error) => {
+        if (error.response) {
+          toastr.error(error.response.data.message);
+        }
+
+        console.log(error);
+      });
+  }
 
   let menu = [
     { group: 'Navigation' },
@@ -25,8 +45,8 @@ const Menu = () => {
       { link: '/gym', title: 'Gym' },
       { link: '/missions', title: 'Missions' },
       { link: '/operations', title: 'Operations' },
+      { link: '/jobs', title: 'Job Clockin', highlight: !isInJob },
       { link: '/criminal_pass', title: 'Criminal Pass' },
-      { link: '/jobs', title: 'Job Clockin', highlight: true },
       { link: '/usersonline', title: 'Users Online' },
       { link: '/city', title: 'Sydney' },
       { link: '/chat', title: 'Chat', badge: 1 },
@@ -62,7 +82,12 @@ const Menu = () => {
       );
     } else {
       menuItems.push(
-        <MenuLink link={val.link} key={val.link} badge={val.badge}>
+        <MenuLink
+          link={val.link}
+          key={val.link}
+          badge={val.badge}
+          highlighted={val.highlight}
+        >
           {val.title}
         </MenuLink>
       );

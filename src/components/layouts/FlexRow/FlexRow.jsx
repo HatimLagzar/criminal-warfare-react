@@ -6,7 +6,11 @@ const FlexRow = (props) => {
     classes += ' ' + props.className;
   }
 
-  return <div className={classes}>{props.children}</div>;
+  return (
+    <div className={classes} style={{ gap: props.gap }}>
+      {props.children}
+    </div>
+  );
 };
 
 export default FlexRow;
