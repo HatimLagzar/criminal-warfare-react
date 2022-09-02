@@ -1,0 +1,33 @@
+#achievements-page {
+  table {
+    width: 97%;
+    margin: 15px;
+    table-layout: auto;
+    border-collapse: collapse;
+    border-radius: 3px;
+
+    tr {
+      border-bottom: 1px solid #161616;
+
+      td,
+      th {
+        padding: 7px;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .progress,
+  .progress .inner {
+    height: 17px;
+    border-radius: 3px;
+  }
+
+  .progress {
+    width: 120px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #1a1a1a;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 25%);
+    float: left;
+  }
+}
