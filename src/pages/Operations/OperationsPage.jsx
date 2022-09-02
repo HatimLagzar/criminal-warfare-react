@@ -50,7 +50,7 @@ export default function OperationsPage() {
           onSubmitHandler={() => {
             setIsLoadingAutoStart(true)
             toggleOperationsAutoStarter()
-              .then(response => {
+              .then(() => {
                 setIsAutoStarterEnabled(!isAutoStarterEnabled)
                 setIsLoadingAutoStart(false)
               })
