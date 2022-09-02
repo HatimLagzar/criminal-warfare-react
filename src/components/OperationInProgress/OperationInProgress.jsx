@@ -13,7 +13,7 @@ export default function OperationInProgress({userOperation}) {
       </thead>
       <tbody>
       <tr>
-        <td>{userOperation.operation.title}</td>
+        <td dangerouslySetInnerHTML={{__html: userOperation.operation.title}}></td>
         <td>{userOperation.done}</td>
         <td>{userOperation.operation.objectives}</td>
         <td dangerouslySetInnerHTML={{__html: userOperation.operation.pay}}></td>
