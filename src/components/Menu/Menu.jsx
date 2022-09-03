@@ -47,6 +47,7 @@ const Menu = () => {
       { link: '/operations', title: 'Operations' },
       { link: '/jobs', title: 'Job Clockin', highlight: !isInJob },
       { link: '/achievements', title: 'Achievements' },
+      { link: '/arena', title: 'Arena' },
       { link: '/criminal_pass', title: 'Criminal Pass' },
       { link: '/usersonline', title: 'Users Online' },
       { link: '/city', title: 'Sydney' },

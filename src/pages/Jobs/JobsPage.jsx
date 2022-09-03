@@ -17,6 +17,8 @@ export default function JobsPage() {
   const isInJob = useSelector((state) => state.jobs.isInJob);
 
   useEffect(() => {
+    document.title = 'Jobs | Criminal Warfare';
+
     if (jobsData === null) {
       getClockIns()
         .then((response) => {

@@ -11,6 +11,7 @@ import MissionsPage from '../../pages/Missions/MissionsPage';
 import OperationsPage from '../../pages/Operations/OperationsPage';
 import JobsPage from '../../pages/Jobs/JobsPage';
 import AchievementsPage from '../../pages/Achievements/AchievementsPage';
+import ArenaPage from '../../pages/Arena/ArenaPage';
 
 export default function Router() {
   return (
@@ -26,6 +27,7 @@ export default function Router() {
       <Route path='operations' exact element={<OperationsPage />} />
       <Route path='jobs' exact element={<JobsPage />} />
       <Route path='achievements' exact element={<AchievementsPage />} />
+      <Route path='arena' exact element={<ArenaPage />} />
     </Routes>
   );
 }

@@ -11,6 +11,8 @@ export default function AchievementsPage() {
   const [achievementsData, setAchievementsData] = useState(null);
 
   useEffect(() => {
+    document.title = 'Achievements | Criminal Warfare';
+
     if (achievementsData === null) {
       getAllAchievements()
         .then((response) => {
