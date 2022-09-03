@@ -77,7 +77,9 @@ export default function LoginPage() {
             <Table className='text-center' data={usersStats} />
           </ContentArea>
         </FlexElement>
+      </FlexWrap>
 
+      <FlexRow>
         <FlexElement className={'login-content-area'}>
           <ContentArea title='Login'>
             <LoginForm />
@@ -89,7 +91,7 @@ export default function LoginPage() {
             <Table className='login-table' data={lastestNews} noHeader />
           </ContentArea>
         </FlexElement>
-      </FlexWrap>
+      </FlexRow>
 
       <FlexRow>
         <FlexElement className={'login-stats-area'}>
