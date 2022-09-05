@@ -1,0 +1,29 @@
+#dailies-page {
+  table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+    background-color: rgba(50,50,50,.3);
+    border: 1px solid black;
+
+    tr {
+      border-bottom: 1px solid #161616;
+
+      td,
+      th {
+        padding: 7px;
+        vertical-align: middle;
+      }
+    }
+
+    tbody tr {
+      td:first-of-type {
+        width: 120px;
+      }
+
+      td:last-of-type {
+        width: 50px;
+      }
+    }
+  }
+}

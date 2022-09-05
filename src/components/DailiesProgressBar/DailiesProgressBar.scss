@@ -1,0 +1,26 @@
+.bar-container {
+  display: inline-block;
+  width: 100%;
+}
+
+.bar {
+  display: flex;
+  width: 100%;
+  margin: 5px auto;
+
+  .percentage {
+    flex: 1;
+    border-radius: 5px;
+    background: rgba(100,100,100,.25);
+    margin: 2px;
+    height: 5px;
+
+    &.current {
+      background: #00c700;
+    }
+
+    &.next {
+      background: #ff9147;
+    }
+  }
+}

@@ -2,10 +2,10 @@ import './Menu.scss';
 import MenuGroup from './../MenuGroup/MenuGroup';
 import MenuLink from './../MenuLink/MenuLink';
 import useAuthenticationStatus from '../../hooks/auth/useAuthenticationStatus';
-import { checkIsInJob } from '../../api/jobs-api';
+import {checkIsInJob} from '../../api/jobs-api';
 import toastr from 'toastr';
-import { useDispatch, useSelector } from 'react-redux';
-import { setIsInJob } from '../../store/features/pages/jobSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {setIsInJob} from '../../store/features/pages/jobSlice';
 
 const Menu = () => {
   const isLoggedIn = useAuthenticationStatus();
@@ -48,6 +48,9 @@ const Menu = () => {
       { link: '/jobs', title: 'Job Clockin', highlight: !isInJob },
       { link: '/achievements', title: 'Achievements' },
       { link: '/arena', title: 'Arena' },
+      { link: '/skills', title: 'Skills' },
+      { link: '/dailies', title: 'Dailies' },
+      {group: 'Communication'},
       { link: '/criminal_pass', title: 'Criminal Pass' },
       { link: '/usersonline', title: 'Users Online' },
       { link: '/city', title: 'Sydney' },
@@ -62,8 +65,6 @@ const Menu = () => {
       { link: '/gang_home', title: 'Your Gang' },
       { link: '/gang_mail', title: 'Gang Mail', badge: 0 },
       { link: '/weekly_arena', title: 'Weekly Arena' },
-      { link: '/skills', title: 'Skills' },
-      { link: '/dailies', title: 'Dailies' },
       { link: '/hospital', title: 'Hospital', badge: 240 },
       { link: '/prison', title: 'Prison', badge: 3 },
       { link: '/pets', title: 'Pets' },
