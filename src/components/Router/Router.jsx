@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import HomePage from '../../pages/Home/HomePage';
 import LoginPage from '../../pages/Login/LoginPage';
 import TravelPage from '../../pages/Travel/TravelPage';
@@ -12,6 +12,7 @@ import OperationsPage from '../../pages/Operations/OperationsPage';
 import JobsPage from '../../pages/Jobs/JobsPage';
 import AchievementsPage from '../../pages/Achievements/AchievementsPage';
 import ArenaPage from '../../pages/Arena/ArenaPage';
+import SkillsPage from '../../pages/Skills/SkillsPage';
 
 export default function Router() {
   return (
@@ -28,6 +29,7 @@ export default function Router() {
       <Route path='jobs' exact element={<JobsPage />} />
       <Route path='achievements' exact element={<AchievementsPage />} />
       <Route path='arena' exact element={<ArenaPage />} />
+      <Route path='skills' exact element={<SkillsPage />} />
     </Routes>
   );
 }
