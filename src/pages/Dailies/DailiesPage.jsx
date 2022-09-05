@@ -34,7 +34,6 @@ export default function DailiesPage() {
   return <div id={'dailies-page'}>
     <ContentArea title={'Dailies / Weeklies'}>
       <table>
-        <thead>
         <tr>
           <th
             className={'text-center'}
@@ -45,15 +44,16 @@ export default function DailiesPage() {
             Dailies
           </th>
         </tr>
-        </thead>
-        <tbody>
+
         {
           Object.values(dailiesData.dailies).length > 0
             ? Object.values(dailiesData.dailies).map((daily, index) => {
               let end = daily.goal;
-              if (daily['goal'] !== 0) {
+              if (daily.hasOwnProperty('goal') && daily['goal'] !== 0) {
                 end = daily['goal'];
-              } else if (daily['barWidth'] !== 0) {
+              } else if (daily.hasOwnProperty('goalDays') && daily['goalDays'] !== 0) {
+                end = daily['goalDays'];
+              } else if (daily.hasOwnProperty('barWidth') && daily['barWidth'] !== 0) {
                 end = daily['barWidth'];
               }
 
@@ -79,7 +79,51 @@ export default function DailiesPage() {
             })
             : ''
         }
-        </tbody>
+        <tr>
+          <th
+            className={'text-center'}
+            style={{
+              backgroundColor: 'rgba(220,0,0,.1)'
+            }}
+            colSpan={3}>
+            Weeklies
+          </th>
+        </tr>
+
+        {
+          Object.values(dailiesData.weeklies).length > 0
+            ? Object.values(dailiesData.weeklies).map((daily, index) => {
+              let end = daily.goal;
+              if (daily.hasOwnProperty('goal') && daily['goal'] !== 0) {
+                end = daily['goal'];
+              } else if (daily.hasOwnProperty('goalDays') && daily['goalDays'] !== 0) {
+                end = daily['goalDays'];
+              } else if (daily.hasOwnProperty('barWidth') && daily['barWidth'] !== 0) {
+                end = daily['barWidth'];
+              }
+
+              return <tr key={index + '-daily'}>
+                <td>{daily.name}</td>
+                <td>
+                  <DailiesProgressBar
+                    current={daily.goal === 0 ? end - parseInt(daily.amount) : parseInt(daily.amount)}
+                    max={end}
+                    increment={parseInt(daily.perBar)}
+                    showText={daily.hasOwnProperty('goal_days') && daily.text.includes('working')}/>
+                  <br/>
+                  {daily.text}
+                </td>
+                <td>
+                  <Link
+                    className={'btn btn-red'}
+                    to={daily.link}>
+                    Go To
+                  </Link>
+                </td>
+              </tr>
+            })
+            : ''
+        }
       </table>
     </ContentArea>
   </div>
