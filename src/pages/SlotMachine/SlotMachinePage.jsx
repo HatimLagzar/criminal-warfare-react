@@ -18,17 +18,19 @@ export default () => {
   useEffect(() => {
     document.title = 'Slot Machine | Criminal Warfare';
 
-    getDailies()
-      .then(response => {
-        setDailiesData(response.data.payload);
-      })
-      .catch(error => {
-        if (error.response)
-          toastr.error(error.response.data.message);
+    if (dailiesData === null) {
+      getDailies()
+        .then(response => {
+          setDailiesData(response.data.payload);
+        })
+        .catch(error => {
+          if (error.response)
+            toastr.error(error.response.data.message);
 
-        console.log(error);
-      })
-  })
+          console.log(error);
+        })
+    }
+  }, [])
 
   function handleSubmit(e) {
     e.preventDefault();
