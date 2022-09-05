@@ -6,7 +6,8 @@ export default function ButtonForm({
   isLoading = false,
   classes,
   onSubmitHandler = () => {},
-  showLoadingIcon = false
+  showLoadingIcon = false,
+  styles = {}
 }) {
   function handleSubmit(e) {
     e.preventDefault();
@@ -16,7 +17,7 @@ export default function ButtonForm({
 
   return (
     <>
-      <form className={'button-form'} onSubmit={handleSubmit}>
+      <form className={'button-form'} onSubmit={handleSubmit} style={styles}>
         <Button text={text} classes={classes} isLoading={isLoading} showLoadingIcon={showLoadingIcon} />
       </form>
     </>

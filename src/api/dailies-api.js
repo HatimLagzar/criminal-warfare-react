@@ -20,3 +20,11 @@ export const spinSlotMachine = (bet, turns) => {
     },
   })
 }
+
+export const searchDowntown = () => {
+  return axios.post('http://127.0.0.1:8000/api/dailies/search-downtown', {}, {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  })
+}

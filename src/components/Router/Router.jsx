@@ -15,6 +15,7 @@ import ArenaPage from '../../pages/Arena/ArenaPage';
 import SkillsPage from '../../pages/Skills/SkillsPage';
 import DailiesPage from "../../pages/Dailies/DailiesPage";
 import SlotMachinePage from "../../pages/SlotMachine/SlotMachinePage";
+import SearchDowntownPage from "../../pages/SearchDowntown/SearchDowntownPage";
 
 export default function Router() {
   return (
@@ -33,7 +34,8 @@ export default function Router() {
       <Route path='arena' exact element={<ArenaPage />} />
       <Route path='skills' exact element={<SkillsPage />} />
       <Route path='dailies' exact element={<DailiesPage />} />
-      <Route path='slot_machine' exact element={<SlotMachinePage />} />
+      <Route path='slot-machine' exact element={<SlotMachinePage />} />
+      <Route path='search-downtown' exact element={<SearchDowntownPage />} />
     </Routes>
   );
 }
