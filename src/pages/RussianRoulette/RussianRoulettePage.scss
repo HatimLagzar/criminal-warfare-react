@@ -1,0 +1,56 @@
+#russian-roulette-page {
+  table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+
+    tr {
+      border-bottom: 1px solid #161616;
+
+      td,
+      th {
+        padding: 7px;
+        vertical-align: middle;
+      }
+    }
+
+    th {
+      text-align: center;
+    }
+
+    th span {
+      font-size: 18px;
+      color: green;
+      margin-top: 3px;
+      display: inline-block;
+    }
+  }
+
+  p {
+    margin: 10px 20px;
+    line-height: normal;
+  }
+
+  .outcome {
+    color: #53b5e2;
+  }
+
+  .intro {
+    color: #e25353;
+  }
+
+  .intro,
+  .outcome {
+    text-align: center;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid black;
+  }
+
+  .shoot-myself-btn {
+    display: block;
+    margin: 0 auto;
+  }
+}

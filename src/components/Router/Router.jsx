@@ -16,6 +16,7 @@ import SkillsPage from '../../pages/Skills/SkillsPage';
 import DailiesPage from "../../pages/Dailies/DailiesPage";
 import SlotMachinePage from "../../pages/SlotMachine/SlotMachinePage";
 import SearchDowntownPage from "../../pages/SearchDowntown/SearchDowntownPage";
+import RussianRoulettePage from "../../pages/RussianRoulette/RussianRoulettePage";
 
 export default function Router() {
   return (
@@ -36,6 +37,7 @@ export default function Router() {
       <Route path='dailies' exact element={<DailiesPage />} />
       <Route path='slot-machine' exact element={<SlotMachinePage />} />
       <Route path='search-downtown' exact element={<SearchDowntownPage />} />
+      <Route path='russian-roulette' exact element={<RussianRoulettePage />} />
     </Routes>
   );
 }

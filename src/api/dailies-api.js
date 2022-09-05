@@ -28,3 +28,14 @@ export const searchDowntown = () => {
     },
   })
 }
+
+export const runRussianRoulette = (bullets) => {
+  const formData = new FormData();
+  formData.set('bullets', bullets);
+
+  return axios.post('http://127.0.0.1:8000/api/dailies/russian-roulette', formData, {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  })
+}

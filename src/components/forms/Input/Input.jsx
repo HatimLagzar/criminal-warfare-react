@@ -5,6 +5,8 @@ export default function Input({
   type,
   handleInputChange = () => {},
   value,
+  styles = {},
+  placeholder = ''
 }) {
   return (
     <input
@@ -13,6 +15,8 @@ export default function Input({
       id={id}
       onChange={handleInputChange}
       value={value}
+      style={styles}
+      placeholder={placeholder}
     />
   );
 }
