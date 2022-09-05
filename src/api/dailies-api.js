@@ -29,6 +29,14 @@ export const searchDowntown = () => {
   })
 }
 
+export const playLuckyDip = () => {
+  return axios.post('http://127.0.0.1:8000/api/dailies/lucky-dip', {}, {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  })
+}
+
 export const runRussianRoulette = (bullets) => {
   const formData = new FormData();
   formData.set('bullets', bullets);
