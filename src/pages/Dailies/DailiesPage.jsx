@@ -2,9 +2,9 @@ import ContentArea from "../../components/ContentArea/ContentArea";
 import {useEffect, useState} from "react";
 import {getDailies} from "../../api/dailies-api";
 import toastr from "toastr";
-import Button from "../../components/buttons/Button/Button";
 import DailiesProgressBar from "../../components/DailiesProgressBar/DailiesProgressBar";
 import './DailiesPage.scss'
+import {Link} from "react-router-dom";
 
 export default function DailiesPage() {
   const [dailiesData, setDailiesData] = useState(null);
@@ -68,7 +68,13 @@ export default function DailiesPage() {
                   <br/>
                   {daily.text}
                 </td>
-                <td><Button text={'Go To'}/></td>
+                <td>
+                  <Link
+                    className={'btn btn-red'}
+                    to={daily.link}>
+                    Go To
+                  </Link>
+                </td>
               </tr>
             })
             : ''
