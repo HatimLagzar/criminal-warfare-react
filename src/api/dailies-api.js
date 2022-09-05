@@ -9,6 +9,14 @@ export const getDailies = () => {
   });
 };
 
+export const getHighLowInfo = () => {
+  return axios.get('http://127.0.0.1:8000/api/dailies/high-low', {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  });
+};
+
 export const spinSlotMachine = (bet, turns) => {
   const formData = new FormData();
   formData.set('bet', bet);
@@ -31,6 +39,22 @@ export const searchDowntown = () => {
 
 export const playLuckyDip = () => {
   return axios.post('http://127.0.0.1:8000/api/dailies/lucky-dip', {}, {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  })
+}
+
+/**
+ *
+ * @param choice {string}
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const playHighLow = (choice) => {
+  const formData = new FormData();
+  formData.set('choice', choice);
+
+  return axios.post('http://127.0.0.1:8000/api/dailies/high-low', formData, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
