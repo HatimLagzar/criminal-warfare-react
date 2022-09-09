@@ -39,7 +39,7 @@ export default function GymPage() {
           console.log(error);
         })
     }
-  }, [aboutMe])
+  }, [])
 
   if (aboutMe === null) {
     return 'Loading...';

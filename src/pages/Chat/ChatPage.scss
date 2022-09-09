@@ -1,0 +1,83 @@
+#chat-page {
+  .ql-container.ql-snow,
+  .ql-toolbar.ql-snow {
+    border: none !important;
+  }
+
+  .ql-toolbar.ql-snow .ql-formats {
+    margin-right: 0 !important;
+  }
+
+  .ql-container.ql-snow {
+    border: 2px solid rgba(0,0,0,.6) !important;
+    min-height: 100px;
+  }
+
+  blockquote {
+    background: rgba(50,50,50,.2);
+    padding: 3px;
+    width: 95%;
+    margin: 0 auto;
+    display: block;
+    border: 1px solid #000;
+    text-align: center;
+  }
+
+  .ql-toolbar.ql-snow {
+    padding: 0 !important;
+
+    button,
+    .ql-align.ql-picker.ql-icon-picker {
+      border: 2px solid rgba(0,0,0,.6) !important;
+      border-bottom: none !important;
+      margin-right: 10px !important;
+      width: 49px !important;
+      height: 32px !important;
+      display: flex;
+      flex-direction: row;
+      justify-self: center;
+      align-items: center;
+
+
+      svg {
+        width: 35px !important;
+        height: 18px !important;
+        display: block;
+        margin: 0 auto;
+      }
+    }
+
+    .ql-align.ql-picker.ql-icon-picker span {
+      &.ql-picker-label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      svg {
+        width: 35px !important;
+        height: 18px !important;
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .chat-wrapper {
+    padding: 10px;
+    background: rgba(50,50,50,.3);
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+    form {
+      width: 100%;
+
+      button {
+        margin-top: 10px;
+        margin-left: auto;
+        display: block;
+      }
+    }
+  }
+}
