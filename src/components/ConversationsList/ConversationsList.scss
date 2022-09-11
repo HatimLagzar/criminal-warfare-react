@@ -1,0 +1,53 @@
+#conversations-list {
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    border-bottom: 1px solid black;
+
+    button.new-mailbox {
+      margin-left: auto;
+      display: inline-block;
+      border-radius: 100%;
+      width: 30px;
+      height: 30px;
+      background-color: rgba(0,0,0,.3);
+      border: 1px solid black;
+      color: #ccc;
+      font-size: 15px;
+      cursor: pointer;
+    }
+  }
+
+  #conversations {
+    ul {
+      padding: 0;
+      margin: 0;
+
+      li {
+        list-style-type: none;
+        border-bottom: 1px solid black;
+        margin-bottom: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        cursor: pointer;
+        padding: 5px 10px;
+
+        &:hover {
+          background-color: rgba(50, 50, 50, 0.6);
+        }
+
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          border: 2px solid black;
+        }
+      }
+    }
+  }
+}

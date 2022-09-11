@@ -8,3 +8,11 @@ export const fetchAuthenticatedUserInfo = () => {
     },
   });
 };
+
+export const searchForUserByUsername = (value) => {
+  return axios.get(`http://127.0.0.1:8000/api/users/search?username=${value}`, {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  });
+};

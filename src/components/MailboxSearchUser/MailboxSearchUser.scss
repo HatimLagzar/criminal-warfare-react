@@ -1,0 +1,63 @@
+.mailbox-search-user {
+  width: 300px;
+  min-height: 83px;
+  background-color: rgba(50, 50, 50, .4);
+  color: #a4a4a4;
+  text-align: left;
+  border-top: 0;
+  font-size: 12px;
+  margin-bottom: 5px;
+  border-radius: 0 0 5px 5px;
+  border-bottom: 0;
+  padding: 5px 3px;
+  display: block;
+  text-indent: 5px;
+
+  input {
+    width: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  ul {
+    padding: 0;
+    margin: 10px 0 0;
+
+    li {
+      list-style-type: none;
+      border-bottom: 1px solid black;
+      //margin-bottom: 5px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      cursor: pointer;
+      padding: 7px 10px;
+      justify-content: space-between;
+
+      &:first-of-type {
+        border-top: 1px solid black;
+      }
+
+      &:last-of-type {
+        border-bottom: none;
+      }
+
+      .info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &:hover {
+        background-color: rgba(50, 50, 50, 0.6);
+      }
+
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid black;
+      }
+    }
+  }
+}

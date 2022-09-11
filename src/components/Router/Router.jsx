@@ -21,6 +21,7 @@ import LuckyDipPage from "../../pages/LuckyDip/LuckyDipPage";
 import HighLowPage from "../../pages/HighLow/HighLowPage";
 import ChatPage from "../../pages/Chat/ChatPage";
 import EventsPage from "../../pages/Events/EventsPage";
+import MailboxPage from "../../pages/Mailbox/MailboxPage";
 
 export default function Router() {
   return (
@@ -46,6 +47,7 @@ export default function Router() {
       <Route path='high-low' exact element={<HighLowPage />} />
       <Route path='chat' exact element={<ChatPage />} />
       <Route path='events' exact element={<EventsPage />} />
+      <Route path='mailbox' exact element={<MailboxPage />} />
     </Routes>
   );
 }

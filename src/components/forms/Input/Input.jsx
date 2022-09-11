@@ -1,13 +1,18 @@
 import './Input.scss';
 
-export default function Input({
-  id,
-  type,
-  handleInputChange = () => {},
-  value,
-  styles = {},
-  placeholder = ''
-}) {
+export default function Input(
+  {
+    id,
+    type,
+    handleInputChange = () => {
+    },
+    value,
+    styles = {},
+    placeholder = '',
+    onBlur = () => {
+    }
+  }
+) {
   return (
     <input
       className='input-form'
@@ -17,6 +22,7 @@ export default function Input({
       value={value}
       style={styles}
       placeholder={placeholder}
+      onBlur={onBlur}
     />
   );
 }
