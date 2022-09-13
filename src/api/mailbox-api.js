@@ -34,6 +34,18 @@ export const sendMessage = (mailboxId, message) => {
   });
 };
 
+export const reportMessageInMailbox = (messageId) => {
+  return axios.post(
+    `http://127.0.0.1:8000/api/mailbox/${messageId}/report`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${authService.getToken()}`,
+      },
+    }
+  );
+};
+
 export const deleteMailbox = (mailboxId) => {
   return axios.delete('http://127.0.0.1:8000/api/mailbox/' + mailboxId, {
     headers: {
