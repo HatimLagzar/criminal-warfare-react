@@ -1,0 +1,17 @@
+#hospital-page {
+  table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+
+    tr {
+      border-bottom: 1px solid #161616;
+
+      td,
+      th {
+        padding: 7px;
+        vertical-align: middle;
+      }
+    }
+  }
+}

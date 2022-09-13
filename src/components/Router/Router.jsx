@@ -22,6 +22,7 @@ import HighLowPage from "../../pages/HighLow/HighLowPage";
 import ChatPage from "../../pages/Chat/ChatPage";
 import EventsPage from "../../pages/Events/EventsPage";
 import MailboxPage from "../../pages/Mailbox/MailboxPage";
+import HospitalPage from "../../pages/HospitalPage/HospitalPage";
 
 export default function Router() {
   return (
@@ -48,6 +49,7 @@ export default function Router() {
       <Route path='chat' exact element={<ChatPage />} />
       <Route path='events' exact element={<EventsPage />} />
       <Route path='mailbox' exact element={<MailboxPage />} />
+      <Route path='hospital' exact element={<HospitalPage />} />
     </Routes>
   );
 }
