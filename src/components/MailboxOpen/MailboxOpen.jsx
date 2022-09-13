@@ -64,6 +64,8 @@ export default ({mailbox}) => {
 
     sendMessage(mailbox.id, newMessage)
       .then(response => {
+        quill.clipboard.dangerouslyPasteHTML('');
+        setNewMessage('');
         setIsLoading(false);
         dispatch(setMailboxMessages({messages: response.data.messages, mailboxId: mailbox.id}))
       })
