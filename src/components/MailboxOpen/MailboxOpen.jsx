@@ -10,6 +10,7 @@ import toastr from 'toastr';
 import { setMailboxMessages } from '../../store/features/pages/mailboxSlice';
 import MailboxMessagesList from '../MailboxMessagesList/MailboxMessagesList';
 import MailboxDeleteChat from '../MailboxDeleteChat/MailboxDeleteChat';
+import MailboxIgnoreUser from '../MailboxIgnoreUser/MailboxIgnoreUser';
 
 export default ({ mailbox }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -108,7 +109,7 @@ export default ({ mailbox }) => {
         </div>
         <div className='mailbox-open-actions'>
           <MailboxDeleteChat mailbox={mailbox} />
-          <ButtonForm text={'Ignore User'} />
+          <MailboxIgnoreUser mailbox={mailbox} />
         </div>
       </header>
       <section className='mailbox-open-body'>

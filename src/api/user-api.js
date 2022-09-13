@@ -16,3 +16,15 @@ export const searchForUserByUsername = (value) => {
     },
   });
 };
+
+export const ignoreUser = (userId) => {
+  return axios.post(
+    `http://127.0.0.1:8000/api/users/${userId}/ignore`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${authService.getToken()}`,
+      },
+    }
+  );
+};
