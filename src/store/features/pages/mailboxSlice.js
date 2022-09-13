@@ -11,8 +11,17 @@ export const mailboxSlice = createSlice({
     setConversations(state, action) {
       state.conversations = action.payload;
     },
+    setMailboxMessages(state, action) {
+      const mailboxId = action.payload.mailboxId;
+      state.conversations.find(item => item.id === mailboxId).messages = action.payload.messages
+
+      if (state.selectedConversation.id === mailboxId) {
+        state.selectedConversation.messages = action.payload.messages
+      }
+    },
     setSelectedConversation(state, action) {
-      state.selectedConversation = action.payload;
+      const mailboxId = action.payload;
+      state.selectedConversation = state.conversations.find(item => item.id === mailboxId);
     },
     setSearchingForUser(state, action) {
       state.searchingForUser = action.payload;
@@ -26,6 +35,12 @@ export const mailboxSlice = createSlice({
   },
 });
 
-export const {setConversations, setSelectedConversation, setSearchingForUser, addNewMailbox} = mailboxSlice.actions;
+export const {
+  setConversations,
+  setSelectedConversation,
+  setSearchingForUser,
+  addNewMailbox,
+  setMailboxMessages
+} = mailboxSlice.actions;
 
 export default mailboxSlice.reducer;

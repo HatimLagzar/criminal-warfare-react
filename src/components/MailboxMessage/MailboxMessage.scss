@@ -1,0 +1,53 @@
+.mailbox-message {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  min-height: 50px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid #000;
+  border-right: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  &.right {
+    flex-direction: row-reverse;
+  }
+
+  img {
+    margin: 10px;
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    border: 2px solid black;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  &.left {
+    .mailbox-message-text {
+      width: 100%;
+    }
+  }
+
+  &.right {
+    .mailbox-message-text {
+      width: 100%;
+      text-align: right;
+    }
+  }
+
+  .mailbox-message-info {
+    margin-top: 10px;
+  }
+
+  .mailbox-message-reply {
+    color: #a4a4a4;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+}

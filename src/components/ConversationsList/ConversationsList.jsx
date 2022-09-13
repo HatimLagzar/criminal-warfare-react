@@ -1,7 +1,7 @@
 import './ConversationsList.scss'
 import noAvatar from '../../assets/img/avatars/no-avatar.png'
 import {useDispatch, useSelector} from "react-redux";
-import {setSearchingForUser} from "../../store/features/pages/mailboxSlice";
+import {setSearchingForUser, setSelectedConversation} from "../../store/features/pages/mailboxSlice";
 
 export default () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ export default () => {
   }
 
   function handleCreateNewConversation(conversation) {
-
+    dispatch(setSelectedConversation(conversation.id));
   }
 
   function showSearch() {
@@ -37,7 +37,7 @@ export default () => {
                 <img src={conversation.receiver.avatar || noAvatar} alt={'Avatar'}/>
                 <div className="text">
                   <p dangerouslySetInnerHTML={{__html: conversation.receiver.username}}></p>
-                  <p>{conversation.lastMessage ? conversation.lastMessage.reply : ''}</p>
+                  <p dangerouslySetInnerHTML={{__html: conversation.lastMessage ? conversation.lastMessage.reply : ''}}></p>
                 </div>
               </li>
             })

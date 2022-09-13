@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setConversations} from "../../store/features/pages/mailboxSlice";
 import toastr from "toastr";
 import MailboxSearchUser from "../../components/MailboxSearchUser/MailboxSearchUser";
+import MailboxOpen from "../../components/MailboxOpen/MailboxOpen";
 
 export default () => {
   const conversations = useSelector(state => state.mailbox.conversations);
@@ -47,15 +48,11 @@ export default () => {
         </FlexElement>
         <FlexElement flex={9}>
           {
-            selectedConversation
-              ? <ContentArea title={'Mailbox'}>
-              </ContentArea>
-              : ''
-          }
-          {
             searchingForUser
-              ? <MailboxSearchUser />
-              : ''
+              ? <MailboxSearchUser/>
+              : selectedConversation
+                ? <MailboxOpen mailbox={selectedConversation} />
+                : ''
           }
         </FlexElement>
       </FlexRow>

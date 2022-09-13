@@ -3,7 +3,7 @@ import Button from "../buttons/Button/Button";
 import {useState} from "react";
 import {createMailbox} from "../../api/mailbox-api";
 import {useDispatch} from "react-redux";
-import {addNewMailbox, setSearchingForUser} from "../../store/features/pages/mailboxSlice";
+import {addNewMailbox, setSearchingForUser, setSelectedConversation} from "../../store/features/pages/mailboxSlice";
 import toastr from "toastr";
 
 export default ({user}) => {
@@ -18,6 +18,7 @@ export default ({user}) => {
         setIsCreatingMailbox(false);
         dispatch(addNewMailbox(response.data.mailbox));
         dispatch(setSearchingForUser(false));
+        dispatch(setSelectedConversation(response.data.mailbox.id));
       })
       .catch(error => {
         setIsCreatingMailbox(false);

@@ -1,0 +1,62 @@
+.mailbox-open {
+  header {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background: linear-gradient(to right, #3e3d3d 0%, #383838 100%) !important;
+    line-height: 13px;
+    font-weight: 700;
+    font-family: Oswald, sans-serif;
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 5px 10px;
+    border: 1px solid #161616;
+    text-indent: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+
+    .mailbox-open-info {
+      display: flex;
+    }
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 100%;
+      border: 2px solid black;
+    }
+  }
+
+  .mailbox-open-body {
+    background-color: rgba(50,50,50,.4);
+    color: #a4a4a4;
+    text-align: left;
+    border-top: 0;
+    font-size: 12px;
+    margin-bottom: 5px;
+    border-radius: 0 0 5px 5px;
+    border-bottom: 0;
+    position: relative;
+    height: 600px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100%;
+    padding: 20px 15px;
+    box-sizing: border-box;
+  }
+
+  .mention-user {
+    i {
+      color: #444;
+      font-size: 16px;
+    }
+  }
+
+  .ql-container.ql-snow,
+  .ql-toolbar.ql-snow {
+    border: 1px solid rgba(50, 50, 50, 0.4);
+  }
+}
