@@ -5,7 +5,7 @@ import { useQuill } from 'react-quilljs';
 import { useEffect, useState } from 'react';
 import * as Emoji from 'quill-emoji';
 import { getMailboxMessages, sendMessage } from '../../api/mailbox-api';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import toastr from 'toastr';
 import { setMailboxMessages } from '../../store/features/pages/mailboxSlice';
 import MailboxMessagesList from '../MailboxMessagesList/MailboxMessagesList';
@@ -26,6 +26,8 @@ export default ({ mailbox }) => {
     theme: 'snow',
   });
   const dispatch = useDispatch();
+
+  const receiver = mailbox.receiver;
 
   useEffect(() => {
     if (quill) {
@@ -95,15 +97,15 @@ export default ({ mailbox }) => {
     <div className={'mailbox-open'}>
       <header>
         <div className='mailbox-open-info'>
-          <img src={mailbox.receiver.avatar || noAvatar} alt='Avatar' />
+          <img src={receiver.avatar || noAvatar} alt='Avatar' />
           <div className='mailbox-open-text'>
             <p
               style={{ margin: 0 }}
-              dangerouslySetInnerHTML={{ __html: mailbox.receiver.username }}
+              dangerouslySetInnerHTML={{ __html: receiver.username }}
             ></p>
             <p
               style={{ marginBottom: 0, marginTop: 7 }}
-              dangerouslySetInnerHTML={{ __html: mailbox.receiver.status }}
+              dangerouslySetInnerHTML={{ __html: receiver.status }}
             ></p>
           </div>
         </div>
