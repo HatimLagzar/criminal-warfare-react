@@ -1,0 +1,64 @@
+#prison-page {
+  .prison-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .prison-left {
+    width: 65%;
+  }
+
+  .prison-right {
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 34%;
+
+    .prison-actions {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    table {
+      ul {
+        position: relative;
+        margin: 10px auto;
+        text-align: left;
+        padding: 0;
+
+        li {
+          display: inline-block;
+          color: #fff;
+          border-radius: 3px;
+          font-weight: 700;
+          margin: 0 10px 10px;
+          font-size: 12px;
+          padding: 10px 0;
+          width: 42%;
+          background-color: rgba(50,50,50,.3);
+          text-align: center;
+          border: 1px solid black;
+        }
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+
+    tr {
+      border-bottom: 1px solid #161616;
+
+      td,
+      th {
+        padding: 7px;
+        vertical-align: middle;
+      }
+    }
+  }
+}

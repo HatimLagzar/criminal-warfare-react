@@ -5,7 +5,13 @@ import {useEffect, useState} from "react";
 import {escapePrisonUsingKey, getPrisonKeysLeft} from "../../api/prison-api";
 import toastr from "toastr";
 
-export default ({setMessage}) => {
+export default (
+  {
+    setMessage,
+    successCallback = () => {
+    }
+  }
+) => {
   const dispatch = useDispatch();
   const [usingPrisonKey, setUsingPrisonKey] = useState(false);
   const [keysLeft, setKeysLeft] = useState(0);
@@ -38,6 +44,7 @@ export default ({setMessage}) => {
             setMessage(response.data.message)
             setKeysLeft(response.data.keysLeft)
             dispatch(setIsInPrison(false))
+            successCallback()
           })
           .catch(error => {
             if (error.response) {
