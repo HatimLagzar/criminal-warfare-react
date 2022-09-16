@@ -8,17 +8,19 @@ export default () => {
   const [criminals, setCriminals] = useState(null);
 
   useEffect(() => {
-    getCriminalsInHospital()
-      .then(response => {
-        setCriminals(response.data.patients);
-      })
-      .catch(error => {
-        if (error.response) {
-          toastr.error(error.response.data.message);
-        }
+    if (criminals === null) {
+      getCriminalsInHospital()
+        .then(response => {
+          setCriminals(response.data.patients);
+        })
+        .catch(error => {
+          if (error.response) {
+            toastr.error(error.response.data.message);
+          }
 
-        console.log(error);
-      })
+          console.log(error);
+        })
+    }
   }, []);
 
   if (criminals === null) {
