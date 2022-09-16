@@ -5,22 +5,18 @@ import {getAllCrimes} from "../../api/crime-api";
 import CrimeItem from "../../components/CrimeItem/CrimeItem";
 import './CrimePage.scss'
 import ButtonForm from "../../components/forms/ButtonForm/ButtonForm";
-import {bailFromPrison, escapePrisonUsingKey} from "../../api/prison-api";
-import {setGeneralInfo, setIsInPrison} from "../../store/features/auth/authSlice";
-import {useDispatch, useSelector} from "react-redux";
-import {refill} from "../../api/refill-api";
-import Button from "../../components/buttons/Button/Button";
+import {bailFromPrison} from "../../api/prison-api";
+import {setIsInPrison} from "../../store/features/auth/authSlice";
+import {useDispatch} from "react-redux";
 import MessageArea from "../../components/MessageArea/MessageArea";
+import RefillNerveButton from "../../components/RefillNerveButton/RefillNerveButton";
+import UsePrisonKeyButton from "../../components/UsePrisonKeyButton/UsePrisonKeyButton";
 
 export default function CrimePage() {
   const [bailIsLoading, setBailIsLoading] = useState(false);
-  const [usingPrisonKey, setUsingPrisonKey] = useState(false);
-  const [refillingNerve, setRefillingNerve] = useState(false);
   const [message, setMessage] = useState('');
   const [crimes, setCrimes] = useState(null);
-  const [keysLeft, setKeysLeft] = useState(0);
   const dispatch = useDispatch();
-  const generalInfo = useSelector(state => state.auth.generalInfo);
 
   useEffect(() => {
     document.title = 'Crimes | Criminal Warfare';
@@ -29,7 +25,6 @@ export default function CrimePage() {
       getAllCrimes()
         .then(response => {
           setCrimes(response.data.crimes);
-          setKeysLeft(response.data.keysLeft);
         })
         .catch(error => {
           if (error.response) {
@@ -48,35 +43,7 @@ export default function CrimePage() {
   return <div id={'crime-page'}>
     <ContentArea title={'Crimes'}>
       <div className={'crime-page-actions'}>
-        {
-          generalInfo.nerveMax !== generalInfo.nerve
-            ? <ButtonForm
-              isLoading={refillingNerve}
-              showLoadingIcon={refillingNerve}
-              text={`Refill ${generalInfo.nerveMax - generalInfo.nerve} Nerve [10 points]`}
-              onSubmitHandler={() => {
-                setRefillingNerve(true)
-                refill('nerve')
-                  .then(response => {
-                    setMessage(response.data.message)
-                    setRefillingNerve(false)
-                    dispatch(setGeneralInfo({
-                      ...generalInfo,
-                      nerve: generalInfo.nerveMax
-                    }))
-                  })
-                  .catch(error => {
-                    if (error.response) {
-                      setMessage(error.response.data.message)
-                    }
-
-                    setRefillingNerve(false)
-                    console.log(error)
-                  })
-              }}
-            />
-            : <Button text={'Nerve is Full'} classes={'btn btn-gray'} isLoading />
-        }
+        <RefillNerveButton setMessage={setMessage} />
 
         <div>
           <ButtonForm isLoading={bailIsLoading} showLoadingIcon={bailIsLoading} text={'Bail'} onSubmitHandler={() => {
@@ -97,30 +64,7 @@ export default function CrimePage() {
               })
           }}/>
 
-          <ButtonForm
-            isLoading={usingPrisonKey}
-            showLoadingIcon={usingPrisonKey}
-            text={'Prison Key (' + keysLeft + ')'}
-            onSubmitHandler={() => {
-              setUsingPrisonKey(true)
-
-              escapePrisonUsingKey()
-                .then(response => {
-                  setUsingPrisonKey(false)
-                  setMessage(response.data.message)
-                  setKeysLeft(response.data.keysLeft)
-                  dispatch(setIsInPrison(false))
-                })
-                .catch(error => {
-                  if (error.response) {
-                    setMessage(error.response.data.message)
-                  }
-
-                  setUsingPrisonKey(false)
-
-                  console.log(error)
-                })
-            }}/>
+          <UsePrisonKeyButton setMessage={setMessage} />
         </div>
       </div>
       <MessageArea message={message} />
