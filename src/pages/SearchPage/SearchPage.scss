@@ -1,0 +1,40 @@
+#search-page {
+  table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+
+    tr {
+      border-bottom: 1px solid #161616;
+
+      td,
+      th {
+        padding: 7px;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .input-group,
+  .select-group {
+    border-bottom: 1px solid #161616;
+    padding: 10px;
+
+    input,
+    select {
+      margin-bottom: 0;
+    }
+  }
+
+  .label-form {
+    font-weight: 700;
+  }
+
+  footer {
+    margin-top: 10px;
+
+    button:first-of-type {
+      margin-right: 5px;
+    }
+  }
+}

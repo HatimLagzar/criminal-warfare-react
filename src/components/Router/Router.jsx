@@ -24,6 +24,7 @@ import EventsPage from "../../pages/Events/EventsPage";
 import MailboxPage from "../../pages/Mailbox/MailboxPage";
 import HospitalPage from "../../pages/HospitalPage/HospitalPage";
 import PrisonPage from "../../pages/PrisonPage/PrisonPage";
+import SearchPage from "../../pages/SearchPage/SearchPage";
 
 export default function Router() {
   return (
@@ -52,6 +53,7 @@ export default function Router() {
       <Route path='mailbox' exact element={<MailboxPage />} />
       <Route path='hospital' exact element={<HospitalPage />} />
       <Route path='prison' exact element={<PrisonPage />} />
+      <Route path='search' exact element={<SearchPage />} />
     </Routes>
   );
 }

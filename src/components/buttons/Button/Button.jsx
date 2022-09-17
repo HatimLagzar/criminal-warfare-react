@@ -7,11 +7,12 @@ export default function Button(
     classes = 'btn-red',
     showLoadingIcon,
     onClick = () => {
-    }
+    },
+    type = 'submit'
   }
 ) {
   return (
-    <button className={'btn ' + classes} disabled={isLoading} onClick={onClick}>
+    <button type={type} className={'btn ' + classes} disabled={isLoading} onClick={onClick}>
       {showLoadingIcon ? <i className='fa fa-spinner fa-spin'></i> : text}
     </button>
   );
