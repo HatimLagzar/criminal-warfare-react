@@ -18,6 +18,20 @@
     background-color: #802627;
   }
 
+  &.btn-transparent {
+    background-color: transparent;
+  }
+
+  &.btn-nav-link {
+    background-color: transparent;
+    border: none;
+    color: #a4a4a4;
+    padding: 0;
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 13px;
+  }
+
   &:disabled {
     text-shadow: none;
     cursor: default;

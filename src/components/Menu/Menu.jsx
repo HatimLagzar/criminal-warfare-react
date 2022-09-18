@@ -6,6 +6,7 @@ import {checkIsInJob} from '../../api/jobs-api';
 import toastr from 'toastr';
 import {useDispatch, useSelector} from 'react-redux';
 import {setIsInJob} from '../../store/features/pages/jobSlice';
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 const Menu = () => {
   const isLoggedIn = useAuthenticationStatus();
@@ -70,7 +71,6 @@ const Menu = () => {
       { link: '/weekly_arena', title: 'Weekly Arena' },
       { link: '/pets', title: 'Pets' },
       { link: '/notepad', title: 'Notepad' },
-      { link: '/logout', title: 'Logout' },
     ];
   }
 
@@ -96,6 +96,8 @@ const Menu = () => {
       );
     }
   });
+
+  menuItems.push(<LogoutButton key={'logout-button'} />);
 
   return <div className={'menu-left'}>{menuItems}</div>;
 };
