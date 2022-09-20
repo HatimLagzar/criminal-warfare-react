@@ -25,6 +25,30 @@ export const searchForPlayers = (params) => {
   });
 };
 
+export const getOthsAndOtds = () => {
+  return axios.get(`http://127.0.0.1:8000/api/otds-oths`, {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  });
+};
+
+export const getTopFiveOthOtd = (name) => {
+  return axios.get(`http://127.0.0.1:8000/api/otds-oths/top-five/${name}`, {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  });
+};
+
+export const getThroneData = () => {
+  return axios.get(`http://127.0.0.1:8000/api/cities/throne`, {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  });
+};
+
 export const ignoreUser = (userId) => {
   return axios.post(
     `http://127.0.0.1:8000/api/users/${userId}/ignore`,

@@ -38,6 +38,7 @@ const Menu = () => {
     menu = [
       { group: 'MAIN STREET' },
       { link: '/', title: 'Home' },
+      { link: '/city', title: 'Sydney' },
       { link: '/travel', title: 'Travel' },
       { link: '/bank', title: 'Bank' },
       { link: '/inventory', title: 'Inventory' },
@@ -61,7 +62,6 @@ const Menu = () => {
       { link: '/search', title: 'Search Player' },
       { link: '/criminal_pass', title: 'Criminal Pass' },
       { link: '/usersonline', title: 'Users Online' },
-      { link: '/city', title: 'Sydney' },
       { link: '/forum', title: 'Forum', badge: 3 },
       { link: '/account', title: 'Account' },
       { link: '/personal_logs', title: 'Personal Logs' },
