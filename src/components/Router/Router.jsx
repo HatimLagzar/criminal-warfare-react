@@ -26,36 +26,38 @@ import HospitalPage from "../../pages/HospitalPage/HospitalPage";
 import PrisonPage from "../../pages/PrisonPage/PrisonPage";
 import SearchPage from "../../pages/SearchPage/SearchPage";
 import CityPage from "../../pages/City/CityPage";
+import GangHome from "../../pages/GangHome/GangHome";
 
 export default function Router() {
   return (
     <Routes>
-      <Route path='login' exact element={<LoginPage />} />
-      <Route path='/' exact element={<HomePage />} />
-      <Route path='travel' exact element={<TravelPage />} />
-      <Route path='bank' exact element={<BankPage />} />
-      <Route path='crime' exact element={<CrimePage />} />
-      <Route path='inventory' exact element={<InventoryPage />} />
-      <Route path='gym' exact element={<GymPage />} />
-      <Route path='missions' exact element={<MissionsPage />} />
-      <Route path='operations' exact element={<OperationsPage />} />
-      <Route path='jobs' exact element={<JobsPage />} />
-      <Route path='achievements' exact element={<AchievementsPage />} />
-      <Route path='arena' exact element={<ArenaPage />} />
-      <Route path='skills' exact element={<SkillsPage />} />
-      <Route path='dailies' exact element={<DailiesPage />} />
-      <Route path='slot-machine' exact element={<SlotMachinePage />} />
-      <Route path='search-downtown' exact element={<SearchDowntownPage />} />
-      <Route path='russian-roulette' exact element={<RussianRoulettePage />} />
-      <Route path='lucky-dip' exact element={<LuckyDipPage />} />
-      <Route path='high-low' exact element={<HighLowPage />} />
-      <Route path='chat' exact element={<ChatPage />} />
-      <Route path='events' exact element={<EventsPage />} />
-      <Route path='mailbox' exact element={<MailboxPage />} />
-      <Route path='hospital' exact element={<HospitalPage />} />
-      <Route path='prison' exact element={<PrisonPage />} />
-      <Route path='search' exact element={<SearchPage />} />
-      <Route path='city' exact element={<CityPage />} />
+      <Route path='login' exact element={<LoginPage/>}/>
+      <Route path='/' exact element={<HomePage/>}/>
+      <Route path='travel' exact element={<TravelPage/>}/>
+      <Route path='bank' exact element={<BankPage/>}/>
+      <Route path='crime' exact element={<CrimePage/>}/>
+      <Route path='inventory' exact element={<InventoryPage/>}/>
+      <Route path='gym' exact element={<GymPage/>}/>
+      <Route path='missions' exact element={<MissionsPage/>}/>
+      <Route path='operations' exact element={<OperationsPage/>}/>
+      <Route path='jobs' exact element={<JobsPage/>}/>
+      <Route path='achievements' exact element={<AchievementsPage/>}/>
+      <Route path='arena' exact element={<ArenaPage/>}/>
+      <Route path='skills' exact element={<SkillsPage/>}/>
+      <Route path='dailies' exact element={<DailiesPage/>}/>
+      <Route path='slot-machine' exact element={<SlotMachinePage/>}/>
+      <Route path='search-downtown' exact element={<SearchDowntownPage/>}/>
+      <Route path='russian-roulette' exact element={<RussianRoulettePage/>}/>
+      <Route path='lucky-dip' exact element={<LuckyDipPage/>}/>
+      <Route path='high-low' exact element={<HighLowPage/>}/>
+      <Route path='chat' exact element={<ChatPage/>}/>
+      <Route path='events' exact element={<EventsPage/>}/>
+      <Route path='mailbox' exact element={<MailboxPage/>}/>
+      <Route path='hospital' exact element={<HospitalPage/>}/>
+      <Route path='prison' exact element={<PrisonPage/>}/>
+      <Route path='search' exact element={<SearchPage/>}/>
+      <Route path='city' exact element={<CityPage/>}/>
+      <Route path='gang-home' exact element={<GangHome/>}/>
     </Routes>
   );
 }
