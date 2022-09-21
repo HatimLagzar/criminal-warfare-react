@@ -1,0 +1,29 @@
+#gang-mail-page {
+  .chat-wrapper {
+    padding: 7px;
+
+    form {
+      margin-top: 5px;
+
+      button {
+        display: block;
+      }
+    }
+
+    .ql-toolbar.ql-snow,
+    .ql-container.ql-snow {
+      border: 1px solid black !important;
+      border-radius: 5px;
+    }
+
+    .ql-toolbar.ql-snow {
+      border-bottom: none !important;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .ql-container.ql-snow {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+}

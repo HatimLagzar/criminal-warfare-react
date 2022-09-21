@@ -27,6 +27,7 @@ import PrisonPage from "../../pages/PrisonPage/PrisonPage";
 import SearchPage from "../../pages/SearchPage/SearchPage";
 import CityPage from "../../pages/City/CityPage";
 import GangHome from "../../pages/GangHome/GangHome";
+import GangMail from "../../pages/GangMail/GangMail";
 
 export default function Router() {
   return (
@@ -58,6 +59,7 @@ export default function Router() {
       <Route path='search' exact element={<SearchPage/>}/>
       <Route path='city' exact element={<CityPage/>}/>
       <Route path='gang-home' exact element={<GangHome/>}/>
+      <Route path='gang-mail' exact element={<GangMail/>}/>
     </Routes>
   );
 }

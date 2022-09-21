@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getGangActions} from "../../api/gangs-api";
 import toastr from "toastr";
+import './GangActions.scss'
 
 export default () => {
   const [actions, setActions] = useState(null);

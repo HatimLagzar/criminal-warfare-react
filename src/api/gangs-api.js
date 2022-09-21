@@ -32,3 +32,22 @@ export const getGangInfo = (gangId) => {
     },
   });
 };
+
+export const getGangMailMessages = () => {
+  return axios.get('http://127.0.0.1:8000/api/gangs/mail', {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  });
+};
+
+export const sendGangMailMessage = (message) => {
+  const formData = new FormData();
+  formData.set('message', message);
+
+  return axios.post('http://127.0.0.1:8000/api/gangs/mail', formData, {
+    headers: {
+      Authorization: `Bearer ${authService.getToken()}`,
+    },
+  });
+};
