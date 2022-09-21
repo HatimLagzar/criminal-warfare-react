@@ -2,14 +2,14 @@ import ContentArea from "../../components/ContentArea/ContentArea";
 import {useEffect, useState} from "react";
 import './GangHome.scss'
 import {Link} from "react-router-dom";
-import {getActiveWeapons, getGangActions, getGangInfo} from "../../api/gangs-api";
+import {getActiveWeapons, getGangInfo} from "../../api/gangs-api";
 import toastr from "toastr";
 import {useSelector} from "react-redux";
 import {formatMoney, formatTimeToETA} from "../../utils/helpers/formatters";
 import {BIG_BROTHER_WEAPON_ID} from "../../utils/constants/gang-weapons";
+import GangActions from "../../components/GangActions/GangActions";
 
 export default () => {
-  const [actions, setActions] = useState(null);
   const [activeWeapons, setActiveWeapons] = useState(null);
   const [gangInfo, setGangInfo] = useState(null);
   const generalInfo = useSelector(state => state.auth.generalInfo);
@@ -20,19 +20,7 @@ export default () => {
 
   useEffect(() => {
     document.title = 'Gang Home | Criminal Warfare';
-
-    if (actions === null) {
-      getGangActions()
-        .then(response => {
-          setActions(response.data.links);
-        })
-        .catch(error => {
-          if (error.response) {
-            toastr.error(error.response.data.message);
-          }
-        })
-    }
-  }, []);
+  }, [])
 
   useEffect(() => {
     if (activeWeapons === null) {
@@ -46,7 +34,7 @@ export default () => {
           }
         })
     }
-  }, [])
+  }, [activeWeapons])
 
   useEffect(() => {
     if (gangInfo === null) {
@@ -62,21 +50,11 @@ export default () => {
           console.log(error);
         })
     }
-  }, [])
+  }, [gangInfo])
 
   return <div id={'gang-home-page'}>
     <ContentArea title={'GANG ACTIONS'}>
-      <div className={'gang-actions'}>
-        {
-          actions !== null && Object.entries(actions).length > 0
-            ? Object.entries(actions).map((action, index) => {
-              return <div className="gang-actions-item" key={index + '-action-link'}>
-                <Link to={action[1]}>{action[0]}</Link>
-              </div>
-            })
-            : ''
-        }
-      </div>
+      <GangActions/>
     </ContentArea>
     <ContentArea title={'GANG WEAPONS ACTIVE'}>
       <table>
