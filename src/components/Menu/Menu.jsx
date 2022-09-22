@@ -97,7 +97,9 @@ const Menu = () => {
     }
   });
 
-  menuItems.push(<LogoutButton key={'logout-button'} />);
+  if (isLoggedIn) {
+    menuItems.push(<LogoutButton key={'logout-button'} />);
+  }
 
   return <div className={'menu-left'}>{menuItems}</div>;
 };
