@@ -1,5 +1,6 @@
 import axios from 'axios';
 import authService from '../services/auth/AuthService';
+import {getBaseApiUrl} from "./base-api";
 
 /**
  * Fetch all cities
@@ -7,7 +8,7 @@ import authService from '../services/auth/AuthService';
  * @returns {Promise<AxiosResponse<any>>}
  */
 export const getAllCities = () => {
-  return axios.get('http://127.0.0.1:8000/api/cities', {
+  return axios.get(getBaseApiUrl() + '/cities', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -21,7 +22,7 @@ export const getAllCities = () => {
  * @returns {Promise<AxiosResponse<any>>}
  */
 export const travel = (cityId) => {
-  return axios.post('http://127.0.0.1:8000/api/cities/' + cityId, {}, {
+  return axios.post(getBaseApiUrl() + '/cities/' + cityId, {}, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },

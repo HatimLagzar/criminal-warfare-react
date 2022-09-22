@@ -1,5 +1,6 @@
 import axios from "axios";
 import authService from "../services/auth/AuthService";
+import {getBaseApiUrl} from "./base-api";
 
 export const train = (type, energy) => {
   const formData = new FormData();
@@ -7,7 +8,7 @@ export const train = (type, energy) => {
   formData.set('energy', energy);
 
   return axios.post(
-    'http://127.0.0.1:8000/api/gym/train',
+    getBaseApiUrl() + '/gym/train',
     formData,
     {
       headers: {

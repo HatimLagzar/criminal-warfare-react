@@ -1,9 +1,10 @@
 import axios from 'axios';
 import authService from '../services/auth/AuthService';
+import {getBaseApiUrl} from "./base-api";
 
 export const refill = (type) => {
   return axios.post(
-    'http://127.0.0.1:8000/api/refill',
+    getBaseApiUrl() + '/refill',
     { type },
     {
       headers: {

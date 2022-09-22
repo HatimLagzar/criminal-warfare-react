@@ -1,8 +1,9 @@
 import axios from 'axios';
 import authService from '../services/auth/AuthService';
+import {getBaseApiUrl} from "./base-api";
 
 export const getCriminalsInPrison = () => {
-  return axios.get('http://127.0.0.1:8000/api/prison', {
+  return axios.get(getBaseApiUrl() + '/prison', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -10,7 +11,7 @@ export const getCriminalsInPrison = () => {
 };
 
 export const getPrisonKeysLeft = () => {
-  return axios.get('http://127.0.0.1:8000/api/prison/prison-key', {
+  return axios.get(getBaseApiUrl() + '/prison/prison-key', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -18,7 +19,7 @@ export const getPrisonKeysLeft = () => {
 };
 
 export const bailFromPrison = () => {
-  return axios.post('http://127.0.0.1:8000/api/prison/bail', {}, {
+  return axios.post(getBaseApiUrl() + '/prison/bail', {}, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -26,7 +27,7 @@ export const bailFromPrison = () => {
 };
 
 export const bustFromPrison = (userId) => {
-  return axios.post('http://127.0.0.1:8000/api/bust/' + userId, {}, {
+  return axios.post(getBaseApiUrl() + '/bust/' + userId, {}, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -34,7 +35,7 @@ export const bustFromPrison = (userId) => {
 };
 
 export const escapePrisonUsingKey = () => {
-  return axios.post('http://127.0.0.1:8000/api/prison/use-key', {}, {
+  return axios.post(getBaseApiUrl() + '/prison/use-key', {}, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },

@@ -1,13 +1,14 @@
 import axios from 'axios';
 import authService from "../services/auth/AuthService";
+import {getBaseApiUrl} from "./base-api";
 
 export const login = (formData) => {
-  return axios.post('http://127.0.0.1:8000/api/login', formData);
+  return axios.post(getBaseApiUrl() + '/login', formData);
 };
 
 export const refresh = (token) => {
   return axios.post(
-    'http://127.0.0.1:8000/api/refresh',
+    getBaseApiUrl() + '/refresh',
     {},
     {
       headers: {
@@ -19,7 +20,7 @@ export const refresh = (token) => {
 
 export const logout = () => {
   return axios.post(
-    'http://127.0.0.1:8000/api/logout',
+    getBaseApiUrl() + '/logout',
     {},
     {
       headers: {

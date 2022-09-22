@@ -1,8 +1,9 @@
 import axios from 'axios';
 import authService from '../services/auth/AuthService';
+import {getBaseApiUrl} from "./base-api";
 
 export const checkIsInJob = () => {
-  return axios.get('http://127.0.0.1:8000/api/jobs/is-in-job', {
+  return axios.get(getBaseApiUrl() + '/jobs/is-in-job', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -10,7 +11,7 @@ export const checkIsInJob = () => {
 };
 
 export const getClockIns = () => {
-  return axios.get('http://127.0.0.1:8000/api/jobs/clock-ins', {
+  return axios.get(getBaseApiUrl() + '/jobs/clock-ins', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -19,7 +20,7 @@ export const getClockIns = () => {
 
 export const clockIn = () => {
   return axios.post(
-    'http://127.0.0.1:8000/api/jobs/clock-in',
+    getBaseApiUrl() + '/jobs/clock-in',
     {},
     {
       headers: {

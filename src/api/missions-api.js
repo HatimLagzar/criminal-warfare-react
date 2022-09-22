@@ -1,8 +1,9 @@
 import axios from "axios";
 import authService from "../services/auth/AuthService";
+import {getBaseApiUrl} from "./base-api";
 
 export const getAllMissions = () => {
-  return axios.get('http://127.0.0.1:8000/api/missions', {
+  return axios.get(getBaseApiUrl() + '/missions', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -10,7 +11,7 @@ export const getAllMissions = () => {
 };
 
 export const startMission = (missionId) => {
-  return axios.post('http://127.0.0.1:8000/api/missions/' + missionId + '/start', {}, {
+  return axios.post(getBaseApiUrl() + '/missions/' + missionId + '/start', {}, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },

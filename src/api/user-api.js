@@ -1,8 +1,9 @@
 import axios from 'axios';
 import authService from '../services/auth/AuthService';
+import {getBaseApiUrl} from "./base-api";
 
 export const fetchAuthenticatedUserInfo = () => {
-  return axios.get('http://127.0.0.1:8000/api/me', {
+  return axios.get(getBaseApiUrl() + '/me', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -10,7 +11,7 @@ export const fetchAuthenticatedUserInfo = () => {
 };
 
 export const searchForUserByUsername = (value) => {
-  return axios.get(`http://127.0.0.1:8000/api/users/search?username=${value}`, {
+  return axios.get(`${getBaseApiUrl()}/users/search?username=${value}`, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -18,7 +19,7 @@ export const searchForUserByUsername = (value) => {
 };
 
 export const searchForPlayers = (params) => {
-  return axios.get(`http://127.0.0.1:8000/api/users/search?` + params, {
+  return axios.get(`${getBaseApiUrl()}/users/search?` + params, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -26,7 +27,7 @@ export const searchForPlayers = (params) => {
 };
 
 export const getOthsAndOtds = () => {
-  return axios.get(`http://127.0.0.1:8000/api/otds-oths`, {
+  return axios.get(`${getBaseApiUrl()}/otds-oths`, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -34,7 +35,7 @@ export const getOthsAndOtds = () => {
 };
 
 export const getTopFiveOthOtd = (name) => {
-  return axios.get(`http://127.0.0.1:8000/api/otds-oths/top-five/${name}`, {
+  return axios.get(`${getBaseApiUrl()}/otds-oths/top-five/${name}`, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -42,7 +43,7 @@ export const getTopFiveOthOtd = (name) => {
 };
 
 export const getThroneData = () => {
-  return axios.get(`http://127.0.0.1:8000/api/cities/throne`, {
+  return axios.get(`${getBaseApiUrl()}/cities/throne`, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -51,7 +52,7 @@ export const getThroneData = () => {
 
 export const ignoreUser = (userId) => {
   return axios.post(
-    `http://127.0.0.1:8000/api/users/${userId}/ignore`,
+    `${getBaseApiUrl()}/users/${userId}/ignore`,
     {},
     {
       headers: {
@@ -63,7 +64,7 @@ export const ignoreUser = (userId) => {
 
 export const attack = (userId) => {
   return axios.post(
-    `http://127.0.0.1:8000/api/attack/${userId}`,
+    `${getBaseApiUrl()}/attack/${userId}`,
     {},
     {
       headers: {
@@ -75,7 +76,7 @@ export const attack = (userId) => {
 
 export const mug = (userId) => {
   return axios.post(
-    `http://127.0.0.1:8000/api/mug/${userId}`,
+    `${getBaseApiUrl()}/mug/${userId}`,
     {},
     {
       headers: {

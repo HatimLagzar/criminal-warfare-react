@@ -1,8 +1,9 @@
 import axios from "axios";
 import authService from "../services/auth/AuthService";
+import {getBaseApiUrl} from "./base-api";
 
 export const getAllOperations = () => {
-  return axios.get('http://127.0.0.1:8000/api/operations', {
+  return axios.get(getBaseApiUrl() + '/operations', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -10,7 +11,7 @@ export const getAllOperations = () => {
 };
 
 export const toggleOperationsAutoStarter = () => {
-  return axios.post('http://127.0.0.1:8000/api/operations/autostart', {}, {
+  return axios.post(getBaseApiUrl() + '/operations/autostart', {}, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -18,7 +19,7 @@ export const toggleOperationsAutoStarter = () => {
 };
 
 export const startOperation = (operationId) => {
-  return axios.post('http://127.0.0.1:8000/api/operations/' + operationId + '/start', {}, {
+  return axios.post(getBaseApiUrl() + '/operations/' + operationId + '/start', {}, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -29,7 +30,7 @@ export const buyPremiumOperation = (opSet) => {
   const formData = new FormData();
   formData.set('opSet', opSet);
 
-  return axios.post('http://127.0.0.1:8000/api/operations/premium/buy', formData, {
+  return axios.post(getBaseApiUrl() + '/operations/premium/buy', formData, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },

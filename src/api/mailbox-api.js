@@ -1,8 +1,9 @@
 import axios from 'axios';
 import authService from '../services/auth/AuthService';
+import {getBaseApiUrl} from "./base-api";
 
 export const getConversations = (abortController) => {
-  return axios.get('http://127.0.0.1:8000/api/mailbox', {
+  return axios.get(getBaseApiUrl() + '/mailbox', {
     headers: {
       signal: abortController.signal,
       Authorization: `Bearer ${authService.getToken()}`,
@@ -12,7 +13,7 @@ export const getConversations = (abortController) => {
 
 export const createMailbox = (userId) => {
   return axios.post(
-    'http://127.0.0.1:8000/api/mailbox/' + userId,
+    getBaseApiUrl() + '/mailbox/' + userId,
     {},
     {
       headers: {
@@ -27,7 +28,7 @@ export const sendMessage = (mailboxId, message) => {
   formData.set('mailboxId', mailboxId);
   formData.set('message', message);
 
-  return axios.post('http://127.0.0.1:8000/api/mailbox/message', formData, {
+  return axios.post(getBaseApiUrl() + '/mailbox/message', formData, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -47,7 +48,7 @@ export const reportMessageInMailbox = (messageId) => {
 };
 
 export const deleteMailbox = (mailboxId) => {
-  return axios.delete('http://127.0.0.1:8000/api/mailbox/' + mailboxId, {
+  return axios.delete(getBaseApiUrl() + '/mailbox/' + mailboxId, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -56,7 +57,7 @@ export const deleteMailbox = (mailboxId) => {
 
 export const getMailboxMessages = (mailboxId) => {
   return axios.get(
-    'http://127.0.0.1:8000/api/mailbox/' + mailboxId + '/messages',
+    getBaseApiUrl() + '/mailbox/' + mailboxId + '/messages',
     {
       headers: {
         Authorization: `Bearer ${authService.getToken()}`,

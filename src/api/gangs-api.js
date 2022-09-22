@@ -1,8 +1,9 @@
 import axios from 'axios';
 import authService from '../services/auth/AuthService';
+import {getBaseApiUrl} from "./base-api";
 
 export const getGangsList = () => {
-  return axios.get('http://127.0.0.1:8000/api/gangs', {
+  return axios.get(getBaseApiUrl() + '/gangs', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -10,7 +11,7 @@ export const getGangsList = () => {
 };
 
 export const getGangActions = () => {
-  return axios.get('http://127.0.0.1:8000/api/gangs/actions', {
+  return axios.get(getBaseApiUrl() + '/gangs/actions', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -18,7 +19,7 @@ export const getGangActions = () => {
 };
 
 export const getActiveWeapons = () => {
-  return axios.get('http://127.0.0.1:8000/api/gangs/weapons/active', {
+  return axios.get(getBaseApiUrl() + '/gangs/weapons/active', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -26,7 +27,7 @@ export const getActiveWeapons = () => {
 };
 
 export const getGangInfo = (gangId) => {
-  return axios.get('http://127.0.0.1:8000/api/gangs/' + gangId, {
+  return axios.get(getBaseApiUrl() + '/gangs/' + gangId, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -34,7 +35,7 @@ export const getGangInfo = (gangId) => {
 };
 
 export const getGangMailMessages = () => {
-  return axios.get('http://127.0.0.1:8000/api/gangs/mail', {
+  return axios.get(getBaseApiUrl() + '/gangs/mail', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -45,7 +46,7 @@ export const sendGangMailMessage = (message) => {
   const formData = new FormData();
   formData.set('message', message);
 
-  return axios.post('http://127.0.0.1:8000/api/gangs/mail', formData, {
+  return axios.post(getBaseApiUrl() + '/gangs/mail', formData, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },

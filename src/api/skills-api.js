@@ -1,8 +1,9 @@
 import axios from 'axios';
 import authService from '../services/auth/AuthService';
+import {getBaseApiUrl} from "./base-api";
 
 export const getSkills = () => {
-  return axios.get('http://127.0.0.1:8000/api/skills', {
+  return axios.get(getBaseApiUrl() + '/skills', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -14,7 +15,7 @@ export const enableSkill = (skillId, objective) => {
   formData.set('objective', objective);
 
   return axios.post(
-    'http://127.0.0.1:8000/api/skills/' + skillId + '/enable',
+    getBaseApiUrl() + '/skills/' + skillId + '/enable',
     formData,
     {
       headers: {
@@ -28,7 +29,7 @@ export const upgradeSkill = (type) => {
   const formData = new FormData();
   formData.set('type', type);
 
-  return axios.post('http://127.0.0.1:8000/api/skills/upgrade', formData, {
+  return axios.post(getBaseApiUrl() + '/skills/upgrade', formData, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -39,7 +40,7 @@ export const downgradeSkill = (type) => {
   const formData = new FormData();
   formData.set('type', type);
 
-  return axios.post('http://127.0.0.1:8000/api/skills/downgrade', formData, {
+  return axios.post(getBaseApiUrl() + '/skills/downgrade', formData, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -48,7 +49,7 @@ export const downgradeSkill = (type) => {
 
 export const submitSkillsUpgrades = () => {
   return axios.post(
-    'http://127.0.0.1:8000/api/skills/submit-upgrades',
+    getBaseApiUrl() + '/skills/submit-upgrades',
     {},
     {
       headers: {

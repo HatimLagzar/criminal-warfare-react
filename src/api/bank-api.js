@@ -1,8 +1,9 @@
 import axios from 'axios';
 import authService from '../services/auth/AuthService';
+import {getBaseApiUrl} from "./base-api";
 
 export const getBankInfo = () => {
-  return axios.get('http://127.0.0.1:8000/api/bank', {
+  return axios.get(getBaseApiUrl() + '/bank', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -11,7 +12,7 @@ export const getBankInfo = () => {
 
 export const withdrawMoney = (amount) => {
   return axios.post(
-    'http://127.0.0.1:8000/api/bank/withdraw',
+    getBaseApiUrl() + '/bank/withdraw',
     {
       amount,
     },
@@ -25,7 +26,7 @@ export const withdrawMoney = (amount) => {
 
 export const depositMoney = (amount) => {
   return axios.post(
-    'http://127.0.0.1:8000/api/bank/deposit',
+    getBaseApiUrl() + '/bank/deposit',
     {
       amount,
     },

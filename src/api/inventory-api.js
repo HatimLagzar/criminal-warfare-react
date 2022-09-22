@@ -1,8 +1,9 @@
 import axios from 'axios';
 import authService from './../services/auth/AuthService';
+import {getBaseApiUrl} from "./base-api";
 
 export const getAuthenticatedUserInventory = () => {
-  return axios.get('http://127.0.0.1:8000/api/inventory', {
+  return axios.get(getBaseApiUrl() + '/inventory', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -13,7 +14,7 @@ export const unequipItem = (type) => {
   const formData = new FormData();
   formData.set('type', type);
 
-  return axios.post('http://127.0.0.1:8000/api/inventory/unequip', formData, {
+  return axios.post(getBaseApiUrl() + '/inventory/unequip', formData, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -25,7 +26,7 @@ export const equipItem = (type, itemId) => {
   formData.set('type', type);
 
   return axios.post(
-    'http://127.0.0.1:8000/api/inventory/' + itemId + '/equip',
+    getBaseApiUrl() + '/inventory/' + itemId + '/equip',
     formData,
     {
       headers: {
@@ -42,7 +43,7 @@ export const consumeItem = (itemId, targetId = null) => {
   }
 
   return axios.post(
-    'http://127.0.0.1:8000/api/inventory/' + itemId + '/use',
+    getBaseApiUrl() + '/inventory/' + itemId + '/use',
     formData,
     {
       headers: {

@@ -1,8 +1,9 @@
 import axios from 'axios';
 import authService from '../services/auth/AuthService';
+import {getBaseApiUrl} from "./base-api";
 
 export const getAllCrimes = () => {
-  return axios.get('http://127.0.0.1:8000/api/crimes', {
+  return axios.get(getBaseApiUrl() + '/crimes', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -10,7 +11,7 @@ export const getAllCrimes = () => {
 };
 
 export const doCrime = (crimeId) => {
-  return axios.post('http://127.0.0.1:8000/api/crimes/' + crimeId + '/slow', {}, {
+  return axios.post(getBaseApiUrl() + '/crimes/' + crimeId + '/slow', {}, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
@@ -18,7 +19,7 @@ export const doCrime = (crimeId) => {
 };
 
 export const doCrimeFast = (crimeId) => {
-  return axios.post('http://127.0.0.1:8000/api/crimes/' + crimeId + '/fast', {}, {
+  return axios.post(getBaseApiUrl() + '/crimes/' + crimeId + '/fast', {}, {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },

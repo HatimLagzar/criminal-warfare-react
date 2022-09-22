@@ -1,8 +1,9 @@
 import axios from 'axios';
 import authService from '../services/auth/AuthService';
+import {getBaseApiUrl} from "./base-api";
 
 export const getCriminalsInHospital = () => {
-  return axios.get('http://127.0.0.1:8000/api/hospital', {
+  return axios.get(getBaseApiUrl() + '/hospital', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },

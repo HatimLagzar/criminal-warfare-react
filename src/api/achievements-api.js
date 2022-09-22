@@ -1,8 +1,9 @@
 import axios from 'axios';
 import authService from '../services/auth/AuthService';
+import {getBaseApiUrl} from "./base-api";
 
 export const getAllAchievements = () => {
-  return axios.get('http://127.0.0.1:8000/api/achievements', {
+  return axios.get(getBaseApiUrl() + '/achievements', {
     headers: {
       Authorization: `Bearer ${authService.getToken()}`,
     },
